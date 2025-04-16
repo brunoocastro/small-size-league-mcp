@@ -1,5 +1,6 @@
 # Here we define the providers used in the project
+from langchain_ollama import ChatOllama, OllamaEmbeddings
 
-from langchain_openai import ChatOpenAI
+llm_chat_provider = ChatOllama(model="gemma3")
 
-llm_chat_provider = ChatOpenAI(model="gpt-4o-mini")
+embedding_provider = OllamaEmbeddings(model="nomic-embed-text")
