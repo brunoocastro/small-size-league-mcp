@@ -1,5 +1,3 @@
-import os
-
 DEFAULT_URLS = [
     "https://robocup-ssl.github.io/ssl-goals/sslgoals.html",
     "https://robocup-ssl.github.io/ssl-rules/sslrules.html",
@@ -25,19 +23,19 @@ URL_BLACKLIST = [
     "qualification",
     "teams",
     "results",
-] 
+]
 
 # Sitemap URL
 DEFAULT_SITEMAP_URL = "https://ssl.robocup.org/page-sitemap.html"
 
 # Output file for processed URLs
-URLS_FILE_PATH = "processed_urls.txt"
+URLS_FILE_PATH = "data/processed_urls.txt"
 
 # Full website file path
-FULL_WEBSITE_FILE_PATH = "full_website.txt"
+FULL_WEBSITE_FILE_PATH = "data/full_website.txt"
 
 # Vector store path
-VECTOR_STORE_PATH = os.getcwd()
+VECTOR_STORE_PATH = "data/"
 
 # Vector store collection name
 VECTOR_STORE_COLLECTION_NAME = "small-size-league-mcp"

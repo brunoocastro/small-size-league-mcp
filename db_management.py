@@ -9,10 +9,15 @@ from providers import embedding_provider
 
 logger = logging.getLogger(__name__)
 
-class VectorStore:
-    def __init__(self, persist_path: str = VECTOR_STORE_PATH, collection_name: str = VECTOR_STORE_COLLECTION_NAME):
+
+class VectorStoreManager:
+    def __init__(
+        self,
+        persist_path: str = VECTOR_STORE_PATH,
+        collection_name: str = VECTOR_STORE_COLLECTION_NAME,
+    ):
         self.vector_store_instance = Chroma(
-            collection_name=collection_name,        
+            collection_name=collection_name,
             embedding_function=embedding_provider,
             persist_directory=persist_path,
         )
@@ -25,5 +30,6 @@ class VectorStore:
         # Add new documents
         self.vector_store_instance.add_documents(documents=documents, ids=ids)
         logger.info(f"Added {len(documents)} new documents")
-    def get(self):
+
+    def get(self) -> Chroma:
         return self.vector_store_instance

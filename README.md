@@ -7,8 +7,17 @@ A comprehensive toolset designed to help developers understand and work with Rob
 - Automated website source management
 - Document processing and text extraction
 - Vector-based document storage and retrieval
-- Query interface for league information
-- Regular updates from official sources
+- MCP Server provisioning
+
+## Requirements
+
+To run this project locally, you will need:
+
+- [UV](https://astral.sh/uv/) for Python package management
+- [Ollama](https://ollama.com) for LLM providers
+  - [gemma3](https://ollama.com/library/gemma3) for text generation (LLM)
+  - [nomic-embed-text](https://ollama.com/library/nomic-embed-text) for text embedding
+  - You can also change the providers directly through the [`providers.py`](./providers.py) file.
 
 ## Setup
 
@@ -38,7 +47,24 @@ source .venv/bin/activate  # On Linux/macOS
 uv sync
 ```
 
-## Available Commands
+## Run MCP Server for development
+To run the MCP server locally, use the following command:
+
+```bash
+mcp dev mcp.py
+```
+
+And inside the interface you could use the command:
+```bash
+uv
+```
+
+and the Arguments:
+```bash
+run --with mcp mcp run mcp.py
+```
+
+## Development/Management Available Commands
 
 The project provides several commands through `main.py`:
 
