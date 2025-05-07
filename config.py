@@ -1,10 +1,5 @@
-DEFAULT_URLS = [
-    "https://robocup-ssl.github.io/ssl-goals/sslgoals.html",
-    "https://robocup-ssl.github.io/ssl-rules/sslrules.html",
-    "https://github.com/orgs/RoboCup-SSL/repositories",
-    "https://ssl.robocup.org/rules/",
-    "https://ssl.robocup.org/tournament-rules/",
-    "https://ssl.robocup.org/technical-overview-of-the-small-size-league/",
+WEBSITE_URLS = [
+    "https://ssl.robocup.org/",
     "https://ssl.robocup.org/tournament-organization/",
     "https://ssl.robocup.org/divisions/",
     "https://ssl.robocup.org/open-source-contributions/",
@@ -14,28 +9,49 @@ DEFAULT_URLS = [
     "https://ssl.robocup.org/history-of-technical-challenges/",
     "https://ssl.robocup.org/match-statistics/",
     "https://ssl.robocup.org/contact/",
+    "https://robocup-ssl.github.io/ssl-goals/sslgoals.html",
 ]
-
 # Keywords to filter out from URLs
-URL_BLACKLIST = [
+WEBSITE_URL_BLACKLIST = [
     "comittee",
     "comittees",
     "qualification",
     "teams",
     "results",
+    "rules",
 ]
+
+WEBSITE_URL_BLACKLIST_REGEX = [
+    r"https?:\/\/[^ ]*robocup-\d{4}[^ ]*",
+]
+
+INITIAL_RULES_URLS = [
+    "https://ssl.robocup.org/rules/",
+    "https://robocup-ssl.github.io/ssl-rules/sslrules.html"
+    "https://ssl.robocup.org/tournament-rules/",
+    "https://ssl.robocup.org/technical-overview-of-the-small-size-league/",
+]
+
+INITIAL_REPOSITORY_URLS = ["https://github.com/orgs/RoboCup-SSL/repositories"]
+
 
 # Sitemap URL
 DEFAULT_SITEMAP_URL = "https://ssl.robocup.org/page-sitemap.html"
 
+# Data path
+DATA_PATH = "data/"
+
 # Output file for processed URLs
-URLS_FILE_PATH = "data/processed_urls.txt"
+URLS_FILE_PATH = DATA_PATH + "processed_urls.txt"
 
 # Full website file path
-FULL_WEBSITE_FILE_PATH = "data/full_website.txt"
+FULL_WEBSITE_FILE_PATH = DATA_PATH + "full_website.txt"
 
-# Vector store path
-VECTOR_STORE_PATH = "data/"
+# Full rules file path
+FULL_RULES_FILE_PATH = DATA_PATH + "full_rules.txt"
+
+# Full repository file path
+FULL_REPOSITORY_FILE_PATH = DATA_PATH + "full_repository.txt"
 
 # Vector store collection name
 VECTOR_STORE_COLLECTION_NAME = "small-size-league-mcp"

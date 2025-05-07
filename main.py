@@ -6,9 +6,17 @@ from typing import List
 
 from langchain_core.documents import Document
 
-from config import DEFAULT_SITEMAP_URL, FULL_WEBSITE_FILE_PATH, URLS_FILE_PATH
+from config import (
+    DEFAULT_SITEMAP_URL,
+    FULL_REPOSITORY_FILE_PATH,
+    FULL_RULES_FILE_PATH,
+    FULL_WEBSITE_FILE_PATH,
+    INITIAL_REPOSITORY_URLS,
+    INITIAL_RULES_URLS,
+    URLS_FILE_PATH,
+)
 from db_management import VectorStoreManager
-from text_handler import load_site, save_full_website, split_documents
+from text_handler import load_site, save_full_txt, split_documents
 from website_sources import extract_urls_from_sitemap, process_urls
 
 logger = logging.getLogger(__name__)
@@ -16,7 +24,7 @@ logger = logging.getLogger(__name__)
 
 def update_website_sources(
     sitemap_url: str = DEFAULT_SITEMAP_URL, output_file: str = URLS_FILE_PATH
-) -> None:
+) -> list[str]:
     """Update the website sources by processing the sitemap and saving URLs."""
     logger.info(f"Processing sitemap from: {sitemap_url}")
     urls_info = extract_urls_from_sitemap(sitemap_url)
@@ -53,21 +61,13 @@ def update_website_sources(
     return filtered_urls
 
 
-def update_documents(sources_file: str = URLS_FILE_PATH) -> List[Document]:
+def generate_documents_from_sources(
+    urls: List[str], metadata: dict = {}, save_file_path: str = None
+) -> List[Document]:
     """Update full text and documents based on current sources."""
-    if not os.path.exists(sources_file):
-        logger.error(f"Sources file not found: {sources_file}")
-        return
-
-    logger.info(f"Updating documents from sources in: {sources_file}")
-
-    urls = []
-    with open(sources_file, "r") as f:
-        urls = [line.strip() for line in f]
-
     urls = list(set(urls))
 
-    logger.info(f"Loading {len(urls)} documents from {sources_file}")
+    logger.info(f"Loading content from {len(urls)} URL's into documents ")
 
     documents, tokens_per_doc = load_site(urls)
 
@@ -75,9 +75,14 @@ def update_documents(sources_file: str = URLS_FILE_PATH) -> List[Document]:
         f"Loaded {len(documents)} documents with an average of {sum(tokens_per_doc) / len(tokens_per_doc)} tokens per document"
     )
 
-    # Save the documents to a file
-    logger.info(f"Saving documents to file {FULL_WEBSITE_FILE_PATH}")
-    save_full_website(documents=documents)
+    # Add metadata to documents
+    for document in documents:
+        for key, value in metadata.items():
+            document.metadata[key] = value
+
+    if save_file_path:
+        logger.info(f"Saving documents to file {save_file_path}")
+        save_full_txt(documents=documents, save_file_path=save_file_path)
 
     # Split the documents into chunks
     splits = split_documents(documents)
@@ -116,31 +121,54 @@ def test_vector_store(query: str = "How to submit a paper?"):
         logger.info("\n--------------------------------\n")
 
 
-# def query_llm(query: str = "How to submit a paper?"):
-#     vector_store = VectorStore()
-#     retriever = vector_store.get().as(search_kwargs={"k": 5})
-#     agent = create_agent(llm=llm_chat_provider, retriever)
-#     response = agent.invoke(query)
-#     return response
-
-
 def run_all_commands(query: str = "How to submit a paper?"):
     """Run all update commands sequentially."""
     logger.info("Starting full update process")
 
     # Step 1: Update website sources
-    logger.info("\nStep 1: Updating website sources")
-    update_website_sources()
+    logger.info(f"{'-' * 8}\nStep 1: Fetching website sources")
+    website_pages_urls = update_website_sources()
 
-    # Step 2: Update documents
-    logger.info("\nStep 2: Updating documents")
-    documents = update_documents()
+    # Step 2: Update documents and save full text files
+    logger.info(f"{'-' * 8}\nStep 2: Updating documents and saving full text files")
+
+    logger.info("Step 2.1: Updating website documents")
+    website_documents = generate_documents_from_sources(
+        website_pages_urls,
+        metadata={
+            "type": "website_page",
+            "reliability": 0.6,
+        },
+        save_file_path=FULL_WEBSITE_FILE_PATH,
+    )
+
+    logger.info("Step 2.2: Updating rules documents")
+    rules_documents = generate_documents_from_sources(
+        INITIAL_RULES_URLS,
+        metadata={
+            "type": "rules",
+            "reliability": 1,
+        },
+        save_file_path=FULL_RULES_FILE_PATH,
+    )
+
+    logger.info("Step 2.3: Updating repository documents")
+    repository_documents = generate_documents_from_sources(
+        INITIAL_REPOSITORY_URLS,
+        metadata={
+            "type": "repository",
+        },
+        save_file_path=FULL_REPOSITORY_FILE_PATH,
+    )
+
+    all_documents = website_documents + rules_documents + repository_documents
+    logger.info(f"Total documents generated: {len(all_documents)}")
 
     # Step 3: Update database
-    logger.info("\nStep 3: Updating database")
-    update_database(documents)
+    logger.info(f"{'-' * 8}\nStep 3: Updating database")
+    update_database(documents_list=all_documents)
 
-    logger.info("\nFull update process completed. Lets test the vector store")
+    logger.info(f"{'-' * 8}\nFull update process completed. Lets test the vector store")
     test_vector_store(query)
 
 
@@ -173,9 +201,15 @@ def main():
     )
     docs_parser.add_argument(
         "--sources",
-        type=str,
-        default="processed_urls.txt",
-        help="File containing source URLs",
+        type=List[str],
+        default=[],
+        help="Array of strings representing source URLs",
+    )
+    docs_parser.add_argument(
+        "--metadata",
+        type=dict,
+        default={},
+        help="Metadata to add to the documents",
     )
 
     # Update database command
@@ -184,10 +218,10 @@ def main():
     )
     db_parser.add_argument(
         "--documents",
-        type=str,
+        type=List[Document],
         nargs="+",
         required=True,
-        help="List of documents to process",
+        help="Array of Document objects to process",
     )
 
     # Test vector store command
@@ -223,7 +257,7 @@ def main():
     if args.command == "update-sources":
         update_website_sources(args.sitemap_url, args.output)
     elif args.command == "update-documents":
-        update_documents(args.sources)
+        generate_documents_from_sources(args.sources, args.metadata)
     elif args.command == "update-database":
         update_database(args.documents)
     elif args.command == "test-vector-store":

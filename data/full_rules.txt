@@ -1,0 +1,478 @@
+
+DOCUMENT 1
+SOURCE: https://ssl.robocup.org/rules/
+ID: Unknown ID
+TYPE: rules
+CONTENT:
+The rules of the Small Size League are maintained by the Technical and Organizing Committee. Please contact the Technical Committee for any questions regarding the rules.
+
+The source code for the rule book is maintained on Github.
+
+Rulebook for 2025
+
+The full text of the rule book is available in both HTML format optimized for viewing on electronic devices and as a PDF for printing.
+
+Rules (HTML)
+
+Rules (PDF)
+
+Rule Diff
+
+Rule changes
+
+This is a short summary of the changes in the rules from 2024 to 2025.
+
+Requires that robots physically touched during Timeout have to be removed from the field (#88)
+
+Clarify that robots may not be physically moved during any part of the match, except for moving robots into or our of the field (#88)
+
+Teams must have interchangeable bright and darks hulls. Hulls must cover at least 6cm of the robot’s height, be non-reflective, and avoid vision system colors (#86, #92)
+
+If a team has Robot Too Close to Opponent Defense Area twice while the game is stopped or during a Free Kick, the game is halted immediately (#91)
+
+Rule History
+
+The following sections contain references to the rulebooks of previous years and a brief summary of the changes in that year. Note that the summary is not guaranteed to be complete. Have a look at the documents containing the exact differences for details.
+
+RoboCup 2024 in Eindhoven, Netherlands
+
+Rules 2024 (HTML) | Rules 2024 (PDF)
+
+Limit robots in Division A during group phase to 8, if desired by one team (#71)
+
+Change constraint for automatic robot substitution (#74)
+
+Add a punishment for excessive robot substitution (#78, #80)
+
+Increase substitution time from 10s to 20s (#81)
+
+Some small improvements in rule wording (#77, #83)
+
+RoboCup 2023 in Bordeaux, France
+
+Rules 2023 (HTML) | Rules 2023 (PDF)
+
+Define a larger grace period after halt for robot preparation (#58)
+
+Only count one foul per ball placement for interference (#59)
+
+Do not limit emergency stop to division A (#66)
+
+More explicit field coloring (#54)
+
+Add the tracker protocol (#60)
+
+Add guidance for referees on unsporting behavior (#62)
+
+Add diagrams for game states, referee commands and game events (#63, #64)
+
+Some small improvements in rule wording (#55, #56, #57, #65)
+
+RoboCup 2022 in Bangkok, Thailand
+
+Rules 2022 (HTML) | Rules 2022 (PDF)
+
+Add advantage choice rule (again) (#42)
+
+Better tie-breaking during shoot-out phase (#43)
+
+Exclude shoot-out from early termination rule (#48)
+
+Add goal difference of more than one to early termination rule (#48)
+
+Several small improvement in rule wording
+
+RoboCup 2021 Worldwide
+
+Rules 2021 (HTML) | Rules 2021 (PDF)
+
+Increase number of robots in division A to 11 (#6)
+
+Increase defense area and goal sizes (#30)
+
+Replace indirect free kick by direct free kick (#3)
+
+Chipping ball out of field is now a foul (#5)
+
+Goalkeeper may be changed while ball is in play, if ball is in opponent half (#7)
+
+Robots can be substituted while ball is in play (#9)
+
+Game is not stopped for cards (#10)
+
+Introduce the “emergency stop” (#11)
+
+Replace the current penalty kick procedure by the one-on-one shootout procedure (#14)
+
+Turn multiple yellow cards into red cards instead of penalty kicks (#15)
+
+Introduce communication flags (#26)
+
+Introduce challenge flags (#27)
+
+Resume at the location of the ball when play is stopped after a foul (#29)
+
+Ball placement is not always required anymore (#31)
+
+The ball placement counter is decremented on failures, not reset (#31)
+
+Fouls and offenses restructured (#32)
+
+Stopping vs. non-stopping fouls
+
+Only stop the game for a limited set of fouls
+
+Game continues automatically 5s / 10s after a direct free kick and kick off
+
+Remove foul “Attacker touched opponent in opponent defense area”
+
+Remove foul “Defender partially in own defense area”
+
+RoboCup 2019 in Sydney, Australia
+
+Rules 2019 (HTML) | Rules 2019 (PDF)
+
+Rulebook has been completely rewritten into a new structure
+
+The Game Controller replaces the Referee Box
+
+Dribbling devices that transfer a non-horizontal spin to the ball are permitted
+
+The 10-0 early termination rule changes from a 10 goal advantage to 10 goals shot
+
+The distance to field lines is doubled for all free kick positions
+
+Scoring a goal from a indirect free kick requires a second ball contact of an attacking robot
+
+The match continues after a penalty shot
+
+The ball placement procedure is reworked
+
+The stop speed limit does not apply to automatic ball placement any more
+
+The aimless kick rule is no longer applied in division A
+
+Lack of progress: Not shooting the free kick in time now results in an indirect free kick for the other team instead of a force start
+
+The maximum allowed time to bring the ball into play is reduced to 10 seconds for division B and 5 seconds for division A. (It was 15 seconds)
+
+Touching an opponent inside the own defense area no longer results in a penalty
+
+Every third foul will result in a yellow card. There is a single counter that increases whenever a team commits a foul regardless of the type of foul
+
+The minimum 0.2m distance to the opponent defense area also applies to stop
+
+The match continues when robots crash with similar speed
+
+Pushing is independent of the ball
+
+Tipping over or dropping parts now counts as a foul
+
+Showing lack of respect is defined as unsporting behavior
+
+If an offense happens while the ball is out of play, the free kick type and position will not be overridden
+
+Robot substitution is refactored
+
+Robot substitution requires the match to be halted
+
+RoboCup 2018 in Montreal, Canada
+
+Rulebook | differences to previous year
+
+Introduction of Divisions
+
+Increase field size from 9x6m to 12x9m for DivA
+
+Increase goal size for DivA from 1.0m to 1.2m
+
+Increase number of robots for DivA from 6 to 8
+
+Rectangular defense area (2.4×1.2m DivA, 2.0×1.0m DivB, before: 2×1.0m quarter circle + 1.0×0.5m rectangle
+
+Reduce game time from 10 to 5 minutes, game time only counts down when ball is in play
+
+Mandatory use of an autoRef
+
+Robots have to be completely in their own half during kickoff
+
+Robots do not need to move the ball forward during kickoff
+
+Mandatory ball placement for DivA teams
+
+Forbid chip-kick goals
+
+Reduce maximum ball speed from 8 to 6.5m/s
+
+Every third yellow card results in a penalty kick
+
+Add a measurable definition for robot crashes
+
+Punish collisions with yellow cards
+
+Shoot-out procedure rewritten
+
+RoboCup 2017 in Nagoya, Japan
+
+Rulebook | differences to previous year
+
+Introduction of automatic ball placement by teams
+
+Robots interchanged at the halfway line can replaced immediately, otherwise teams have to wait for the next stoppage
+
+Robots are allowed to enter the center circle during kickoff
+
+Forbid pushing of opponent robots
+
+Introduction of the one-on-one penalty shoot-out
+
+RoboCup 2016 in Leipzig, Germany
+
+Rulebook | differences to previous year
+
+Only minor changes to formulation
+
+RoboCup 2015 in Hefei, China
+
+Rulebook | differences to previous year
+
+Mandatory new field size of 9x6m (with 10% variation)
+
+Increase defense area from 0.8m radius to 1.0m radius and width from 1.95m to 2.5m.
+
+Increase goal width from 0.7m to 1.0m
+
+Introduction of standard color paper for robot patterns that have to be bought by teams before the competition
+
+Maximum dribbling distance is increased from 0.5m to 1.0m
+
+Forbid touching the ball in the opponent defense area
+
+Introduce the carpeting rule
+
+Robot speed limit during stop increased from 1.0m/s to 1.5m/s
+
+RoboCup 2014 in João Pessoa, Brazil
+
+Rulebook | differences to previous year
+
+Introduction of an optional increased field size (double-size field) (6x4m to 8x6m)
+
+Increase defense area for double-size field from 0.8m radius to 1.0m radius and width from 1.95m to 2.5m.
+
+Increase goal width for double-size field from 0.7m to 1.0m
+
+Timeouts increased when playing on double-size field: 6 timeouts and 7.5 minutes
+
+Ball must be touched for the multiple defender rule now (ball inside defense area was sufficient before)
+
+Touching the ball while being partially within the defense area is a foul now
+
+Introduce robot speed limit of 1m/s during stop
+
+RoboCup 2013 in Eindhoven, Netherlands
+
+Rulebook | differences to previous year
+
+Introduce multiple defender rule and punish it with a penalty kick
+
+RoboCup 2012 in Mexico City, Mexico
+
+Rulebook | differences to previous year
+
+Increase defense area; radius from 0.5m to 0.8m, width from 1.35m to 1.95m
+
+Increase number of robots from 5 to 6
+
+Damaged robots result in an indirect free kick
+
+Reduce maximum ball speed from 10 to 8m/s
+
+RoboCup 2011 in Istanbul, Turkey
+
+Rulebook | differences to previous year
+
+No changes
+
+RoboCup 2010 in Singapore, Singapore
+
+Rulebook | differences to previous year
+
+Introduction of the shared vision system
+
+RoboCup 2009 in Graz, Austria
+
+Rulebook | differences to previous year
+
+Reduce field size from 6.1×4.2m to 6.05×4.05m
+
+Introduce the referee walking area
+
+Reduce the maximum robot height to 0.15m for all robots
+
+Reduce playing time from 15 to 10 minutes per half
+
+Reduce the timeout time from 10 to 5 minutes
+
+RoboCup 2008 in Suzhou, China
+
+Rulebook | differences to previous year
+
+Increase field size from 5×3.5m to 6.1×4.2m
+
+Add a rectangle between the two quarter circles of the defense area (increase width by 0.35m)
+
+Add penalty shoot-out
+
+RoboCup 2007 in Atlanta, USA
+
+Rulebook | differences to previous year
+
+Increase field size from 4.9×3.4m to 5×3.5m
+
+Allow the use of an autonomous referee
+
+Forbid attackers to be closer than 0.2m to the opponent defense area during free kicks
+
+Introduce a maximum ball speed of 10m/s
+
+RoboCup 2006
+
+Rulebook
+
+Questions or Clarifications
+
+Questions regarding the rules should be sent to the Technical Committee.
+
+================================================================================
+
+
+DOCUMENT 2
+SOURCE: https://ssl.robocup.org/technical-overview-of-the-small-size-league/
+ID: Unknown ID
+TYPE: rules
+CONTENT:
+This page gives a technical overview of the league. It is meant to give people that are not yet familiar with how the SSL is structured a first high level overview and references to where to look for more information.
+SSL ComponentsSSL-VisionSSL-Game-ControllerAutoRefsSimulatorsVision TrackersTeam AITeam RobotsAdditional League InfrastructureSSL-Log-ToolsSSL-Status-BoardSSL-Vision-ClientSSL-Simulation-SetupSSL-SetupSSL-Match-StatsStandard Network ParametersProtobuf Definitions
+SSL Components
+The following figure shows the different components and how they interact with each other:
+
+SSL-Vision
+This is the official, league-maintained software for robot and ball detection. It is responsible for transforming images from all cameras over the field to coordinates that are broadcast to the teams via multicast. During a competition, it is set up by the technical committee. Teams do not have to take care of it. However, the detections are not reliable and require further processing. Also, for division A there are two cameras. Detections can be on both cameras and need to be merged accordingly.
+SSL-Vision on GitHub
+SSL-Game-Controller
+A match is coordinated by the SSL-Game-Controller. It is running on a computer next to each field and has a UI for the game controller operator. The game controller broadcasts referee messages via multicast, just like SSL-Vision. Additionally, there are synchronous network interfaces for autoRefs and teams to communicate bidirectionally.
+SSL-Game-Controller on GitHub
+AutoRefs
+There are automatic referees that supervise a match and support the SSL-Game-Controller, mainly with detecting fouls. In order to increase robustness and fairness of the foul detections, multiple AutoRefs can (and will) run simultaneously and decisions can be based on a majority vote.
+There are two implementations that are currently under active development by teams and that are used since RoboCup 2018: 
+
+ER-Force
+TIGERs Mannheim
+
+For reference, the following implementations also exist, but are not currently in use:
+
+ssl-autonomous-refbox (one of the first prototypes)
+CM Dragons
+RoboTeam Twente
+
+Simulators
+The Simulation Protocol defines a common way to communicate with an SSL simulator. It has been initially introduced for the virtual tournament at RoboCup 2021. The common protocol should encourage teams to publish their simulator or to use other open sourced simulators. By having a common protocol, switching between different implementations gets easier.
+The protocol allows simulators to add some custom definitions, like additional realism configurations.
+There are currently two open-sourced simulators available: 
+
+grSim
+ER-Force simulator
+
+Vision Trackers
+The data that is published by SSL-Vision is only raw positions per camera. They are noisy, can vanish sometimes and there is no velocity included.
+Not only teams have to take care of that, but also the autoRefs. Since RoboCup 2023, the autoRefs officially publish their filtered/tracked data. Teams, especially new ones, are welcome to use this data instead or in addition to the SSL-Vision data. The SSL-Game-Controller also consumes these packages.
+You can find the Vision Tracker Protocol on GitHub.
+Team AI
+Teams have to write their own software framework that is capable of receiving data from ssl-vision and ssl-game-controller and to communicate with their robots. The communication to the robots is not yet standardized. Most SSL teams use either low-level radio modules that work in the 2.4 GHz range or use 5 GHz Wifi.
+Team Robots
+Teams have to build their robots from scratch. They have to comply to the rules, mainly fit into a 180x150mm cylinder. A lot about how to design a robot can be found in the Open Source Contributions and the TDPs.
+Additional League Infrastructure
+League-maintained software is stored and managed in the RoboCup Small Size League Github organization. Although the repositories are maintained by the Technical Committee, contributions from all members of the community are highly encouraged.
+There are a couple of interesting repositories:
+SSL-Log-Tools
+The ssl-go-tools contain several CLI tools to work with SSL Gamelogs, including:
+
+ssl-auto-recorder: Automatically detect new matches and create individual logs per match
+ssl-log-recorder: Record logs manually
+ssl-log-player: Play a logfile back into the network
+ssl-log-converter: Convert log files to a human-readable format – a JSON stream.
+
+For  more tools, have a look at the repository.
+SSL-Status-Board
+The SSL-Status-Board can be run on a large screen to present the current state of the game to the audience and the human referee.
+SSL-Vision-Client
+A simple browser-based visualizer for the field.
+SSL-Simulation-Setup
+The Simulation-Setup has been created for the virtual tournament at RoboCup 2021 and can also be used for future virtual events or for testing a full setup with all league software.
+SSL-Setup
+The SSL Setup is used to set up all the required software for a real tournament. It contains scripts and Docker Compose configs to install everything on a fresh computer running Ubuntu.
+SSL-Match-Stats
+The SSL measures metrics and statistics over past RoboCups. The code for the Match Statistics is maintained on GitHub.
+Standard Network Parameters
+ProtocolProtobufTypeAddressPortSSL-Game-Controller (GC)RefereeUDP Multicast224.5.23.110003SSL-Vision DetectionsSSL_WrapperPacketUDP Multicast224.5.23.210006SSL-Vision Detections LegacySSL_WrapperPacketUDP Multicast224.5.23.210005AutoRef -> GCAutoRefTCPGC10007AutoRef -> GCAutoRefTCP + SSLGC10107Team -> GCTeamTCPGC10008Team -> GCTeamTCP + SSLGC10108Remote Control -> GCRemote ControlTCPGC10011Remote Control -> GCRemote ControlTCP + SSLGC10111Continuous Integration -> GCContinuous IntegrationTCPGC10009Continuous Integration -> AutoRefAutoRefCiTCPAutoRef10013SSL-Vision-TrackerTrackerWrapperPacketUDP Multicast224.5.23.210010SSL-Vision-Client VisualizationVisualizationUDP Multicast224.5.23.210012Simulation ControlSimulationControlUDPSimulator10300Robot Control BlueRobotControlUDPSimulator10301Robot Control YellowRobotControlUDPSimulator10302Standard Network Parameters
+Protobuf Definitions
+There are several different protobuf definitions, distributed over multiple repositories. This section gives an overview of the available definitions and links to the respective repositories for the latest version of the protocol.
+In general, protocol updates will always be made in an compatible way on the transmission side, so that no software needs to be changed on updates. However, renaming and removing (with reserved flag) fields can be done, if there are good reasons for it.
+
+SSL-Vision
+
+SSL_DetectionFrame: Raw robot and ball detections per camera
+SSL_GeometryData: Global field geometry, camera calibration per camera and ball model parameters
+SSL_WrapperPacket: Message that wraps the DetectionFrame and GeometryData
+TrackedFrame: Filtered robot and ball detections
+TrackerWrapperPacket: Message that wraps the TrackedFrame with additional metadata (not produced by SSL-Vision, see SSL-Vision-Tracker-Protocol)
+
+SSL-Game-Controller
+
+Referee: The current game state with commands, game events, team state, etc.
+Remote Control
+
+AutoRef: Send detected game events to the GC
+Team: Change the keeper id and request robot substitution
+Remote Control: Control from external device, like RaspberryPi with Display
+
+Continuous Integration: Single connection for integration of the GC into a teams software
+
+SSL-Simulation-Protocol: A common protocol for different interchangeable simulator implementations
+SSL-Vision-Client
+
+Visualization: Send shapes (circles and lines) to the vision-client
+
+================================================================================
+
+
+DOCUMENT 3
+SOURCE: https://robocup-ssl.github.io/ssl-rules/sslrules.htmlhttps://ssl.robocup.org/tournament-rules/
+ID: Unknown ID
+TYPE: rules
+CONTENT:
+Page not found · GitHub Pages
+
+404
+File not found
+
+        The site configured at this address does not
+        contain the requested file.
+      
+
+        If this is your site, make sure that the filename case matches the URL
+        as well as any file permissions.
+        For root URLs (like http://example.com/) you must provide an
+        index.html file.
+      
+
+Read the full documentation
+        for more information about using GitHub Pages.
+      
+
+GitHub Status —
+        @githubstatus
+
+================================================================================
+

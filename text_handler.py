@@ -10,8 +10,6 @@ from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from tqdm import tqdm
 
-from config import FULL_WEBSITE_FILE_PATH
-
 
 def count_tokens(text, model="cl100k_base"):
     """
@@ -76,7 +74,10 @@ def load_site(urls: List[str]) -> Tuple[List[Document], List[int]]:
 
         # Load documents and track URLs
         for d in docs_lazy:
+            # Add document source as metadata
             d.metadata["source"] = url
+
+            # Add the document to the list
             docs.append(d)
 
     print(f"Loaded {len(docs)} documents from website.")
@@ -95,26 +96,26 @@ def load_site(urls: List[str]) -> Tuple[List[Document], List[int]]:
     return docs, tokens_per_doc
 
 
-def save_full_website(
-    documents: List[Document], full_website_file_path: str = FULL_WEBSITE_FILE_PATH
-):
+def save_full_txt(documents: List[Document], save_file_path: str):
     """Save the documents to a file"""
 
     # Open the output file
-    with open(full_website_file_path, "w") as f:
+    with open(save_file_path, "w") as f:
         # Write each document
         for i, doc in enumerate(documents):
             # Get the source (URL) from metadata
             source = doc.metadata.get("source", "Unknown URL")
 
             # Write the document with proper formatting
-            f.write(f"DOCUMENT {i + 1}\n")
+            f.write(f"\nDOCUMENT {i + 1}\n")
             f.write(f"SOURCE: {source}\n")
+            f.write(f"ID: {doc.metadata.get('id', 'Unknown ID')}\n")
+            f.write(f"TYPE: {doc.metadata.get('type', 'Unknown Type')}\n")
             f.write("CONTENT:\n")
             f.write(doc.page_content)
             f.write("\n\n" + "=" * 80 + "\n\n")
 
-    print(f"Documents concatenated into {full_website_file_path}")
+    print(f"Documents concatenated into {save_file_path}")
 
 
 def split_documents(documents: List[Document]):
@@ -149,12 +150,13 @@ def split_documents(documents: List[Document]):
     # Generate a deterministic ID based on the URL
     for doc in split_docs:
         source = doc.metadata["source"] or uuid.uuid4()
+        type = doc.metadata.get("type", "Unknown_Type")
         content = doc.page_content or uuid.uuid4()
         # Create a unique hash string using the source and content
         # This ensures that the same content always generates the same ID
         # This is important for reproducibility and consistency
         # and to avoid collisions in the database
-        hash_string = f"{source}-{content}"
+        hash_string = f"{type}-{source}-{content}"
 
         # Generate a deterministic ID based on the URL and content
         url_hash = hashlib.md5(hash_string.encode()).hexdigest()
