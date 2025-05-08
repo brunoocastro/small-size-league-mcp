@@ -1,6 +1,7 @@
 import hashlib
 import re
 import uuid
+from logging import getLogger
 from typing import List, Tuple
 
 import tiktoken
@@ -9,6 +10,8 @@ from langchain_community.document_loaders import RecursiveUrlLoader
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from tqdm import tqdm
+
+logger = getLogger(__name__)
 
 
 def count_tokens(text, model="cl100k_base"):
@@ -27,16 +30,61 @@ def count_tokens(text, model="cl100k_base"):
 
 
 def bs4_extractor(html: str) -> str:
-    soup = BeautifulSoup(html, "lxml")
+    """
+    Extracts clean text from HTML or XML content, removing CSS, scripts, and unnecessary whitespace.
+    Handles both HTML and XML documents robustly.
+    """
+    # Try to parse as XML first, fallback to HTML if it fails
+    try:
+        soup = BeautifulSoup(html, "lxml-xml")
 
-    # Target the main article content for documentation
+        # If root is <html>, treat as HTML
+        if soup.find("html"):
+            logger.debug("Parsed as HTML")
+            soup = BeautifulSoup(html, "html.parser")
+        else:
+            logger.debug("Parsed as XML")
+    except Exception:
+        logger.debug("Parsed as HTML - Fallback")
+        soup = BeautifulSoup(html, "html.parser")
+
+    # Remove all <style>, <script>, <noscript>, and <template> elements
+    for tag in soup(["style", "script", "noscript", "template"]):
+        tag.decompose()
+        logger.debug(f"Removed {tag.name} tag")
+
+    # Remove comments
+    for comment in soup.find_all(
+        string=lambda text: isinstance(text, type(soup.Comment))
+    ):
+        comment.extract()
+        logger.debug("Removed comment")
+
+    # Try to target main content if possible
     main_content = soup.find("article", class_="status-publish")
+    if not main_content:
+        # Try common main content tags
+        for tag in ["main", "article", "section", "body"]:
+            main_content = soup.find(tag)
+            if main_content:
+                break
 
-    # If found, use that, otherwise fall back to the whole document
-    content = main_content.get_text() if main_content else soup.text
+    # Extract text
+    content = (
+        main_content.get_text(separator="\n")
+        if main_content
+        else soup.get_text(separator="\n")
+    )
 
-    # Clean up whitespace
-    content = re.sub(r"\n\n+", "\n\n", content).strip()
+    # Remove excessive whitespace and blank lines
+    # Replace multiple spaces/tabs with a single space
+    content = re.sub(r"[ \t]+", " ", content)
+    # Replace multiple newlines (including those with spaces/tabs in between) with a single newline
+    content = re.sub(r"(\n\s*){2,}", "\n", content)
+    # Remove leading/trailing whitespace
+    content = content.strip()
+
+    logger.debug(f"Extracted content with length {len(content)}")
 
     return content
 
@@ -53,7 +101,7 @@ def load_site(urls: List[str]) -> Tuple[List[Document], List[int]]:
         list: A list of Document objects containing the loaded content
         list: A list of tokens per document
     """
-    print("Loading website...")
+    logger.info("Loading website...")
 
     docs = []
     # Show the progress
@@ -80,7 +128,7 @@ def load_site(urls: List[str]) -> Tuple[List[Document], List[int]]:
             # Add the document to the list
             docs.append(d)
 
-    print(f"Loaded {len(docs)} documents from website.")
+    logger.info(f"Loaded {len(docs)} documents from website.")
 
     # Count total tokens in documents
     total_tokens = 0
@@ -91,7 +139,7 @@ def load_site(urls: List[str]) -> Tuple[List[Document], List[int]]:
         total_tokens += count_tokens(doc.page_content)
         tokens_per_doc.append(count_tokens(doc.page_content))
 
-    print(f"Total tokens in loaded documents: {total_tokens}")
+    logger.info(f"Total tokens in loaded documents: {total_tokens}")
 
     return docs, tokens_per_doc
 
@@ -115,7 +163,7 @@ def save_full_txt(documents: List[Document], save_file_path: str):
             f.write(doc.page_content)
             f.write("\n\n" + "=" * 80 + "\n\n")
 
-    print(f"Documents concatenated into {save_file_path}")
+    logger.info(f"Documents concatenated and saved into {save_file_path}")
 
 
 def split_documents(documents: List[Document]):
@@ -133,7 +181,7 @@ def split_documents(documents: List[Document]):
     Returns:
         list: A list of split Document objects
     """
-    print("Splitting documents...")
+    logger.info("Splitting documents...")
 
     # Initialize text splitter using tiktoken for accurate token counting
     # chunk_size=8,000 creates relatively large chunks for comprehensive context
@@ -145,13 +193,20 @@ def split_documents(documents: List[Document]):
     # Split documents into chunks
     split_docs = text_splitter.split_documents(documents)
 
-    print(f"Created {len(split_docs)} chunks from documents.")
+    logger.info(f"Created {len(split_docs)} chunks from documents.")
+
+    # remove documents without content
+    split_docs = [
+        doc
+        for doc in split_docs
+        if doc.page_content and len(doc.page_content.strip()) > 0
+    ]
 
     # Generate a deterministic ID based on the URL
     for doc in split_docs:
-        source = doc.metadata["source"] or uuid.uuid4()
+        source = doc.metadata.get("source", uuid.uuid4())
         type = doc.metadata.get("type", "Unknown_Type")
-        content = doc.page_content or uuid.uuid4()
+        content = doc.page_content.strip()
         # Create a unique hash string using the source and content
         # This ensures that the same content always generates the same ID
         # This is important for reproducibility and consistency
@@ -167,6 +222,6 @@ def split_documents(documents: List[Document]):
     for doc in split_docs:
         total_tokens += count_tokens(doc.page_content)
 
-    print(f"Total tokens in split documents: {total_tokens}")
+    logger.info(f"Total tokens in split documents: {total_tokens}")
 
     return split_docs

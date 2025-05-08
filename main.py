@@ -15,9 +15,9 @@ from config import (
     INITIAL_RULES_URLS,
     URLS_FILE_PATH,
 )
-from db_management import VectorStoreManager
-from text_handler import load_site, save_full_txt, split_documents
-from website_sources import extract_urls_from_sitemap, process_urls
+from modules.db_management import VectorStoreManager
+from modules.text_handler import load_site, save_full_txt, split_documents
+from modules.website_sources import extract_urls_from_sitemap, process_urls
 
 logger = logging.getLogger(__name__)
 
@@ -75,10 +75,11 @@ def generate_documents_from_sources(
         f"Loaded {len(documents)} documents with an average of {sum(tokens_per_doc) / len(tokens_per_doc)} tokens per document"
     )
 
-    # Add metadata to documents
-    for document in documents:
-        for key, value in metadata.items():
-            document.metadata[key] = value
+    if len(metadata.items()) > 0 and len(documents) > 0:
+        # Add metadata to documents
+        for document in documents:
+            for key, value in metadata.items():
+                document.metadata[key] = value
 
     if save_file_path:
         logger.info(f"Saving documents to file {save_file_path}")

@@ -2,10 +2,12 @@ import logging
 from enum import Enum
 from functools import lru_cache
 
+import requests
 from fastmcp import FastMCP
 
 import config
-from db_management import VectorStoreManager
+from models import TDPResult
+from modules.db_management import VectorStoreManager
 
 logger = logging.getLogger(__name__)
 
@@ -58,6 +60,43 @@ async def retrieve_k_relevant_documents(
     logger.info(f"Retrieved {len(documents)} documents for query: {query}")
 
     return documents
+
+
+@server.tool()
+def tdp_search_tool(query: str, leagues: str = "soccer_smallsize") -> str:
+    """
+    Searches the TDP (Team Description Paper) for relevant information
+    about small size league soccer projects. Useful for finding technical
+    documentation, specifications, improvements and related information.
+    """
+
+    # URL to the TDP search API
+    base_url = "https://functionapp-test-dotenv-310.azurewebsites.net/api/query"
+    params = {"query": query, "leagues": leagues}
+
+    try:
+        # Request to the TDP search API
+        response = requests.get(base_url, params=params)
+
+        # Raise an exception if the response is not successful
+        response.raise_for_status()
+
+        # Parse the JSON response
+        json_response = response.json()
+
+        print(f"JSON response: {json_response}")
+
+        # Create a TDPResult object from the JSON response
+        result = TDPResult(**json_response)
+
+        # Print the TDP search result in a pretty markdown format
+        print(f"\nTDP search result: \n{result.pretty_markdown()}\n")
+
+        # Return the TDP search result in a pretty markdown format
+        return result.pretty_markdown()
+    except requests.exceptions.RequestException as e:
+        # Return an error message if the TDP search API request fails
+        return f"Error performing TDP search: {str(e)}"
 
 
 @lru_cache(maxsize=128)
