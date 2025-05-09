@@ -3,6 +3,7 @@ from functools import lru_cache
 from typing import List
 
 from langchain_chroma.vectorstores import Chroma
+from langchain_community.vectorstores.utils import filter_complex_metadata
 from langchain_core.documents import Document
 
 from config import DATA_PATH, VECTOR_STORE_COLLECTION_NAME
@@ -86,15 +87,6 @@ class VectorStoreManager:
                 logger.debug(f"Document {doc.id} has no content")
                 continue
 
-            for key, value in doc.metadata.items():
-                if not isinstance(value, bool) and not isinstance(
-                    value, (str, int, float)
-                ):
-                    logger.debug(
-                        f"Document {doc.id} has a metadata key {key} with a non-string, non-numeric, non-boolean value {value}"
-                    )
-                    continue
-
             valid_documents.append(doc)
 
         if len(valid_documents) != len(documents):
@@ -105,6 +97,8 @@ class VectorStoreManager:
         logger.info(
             f"Valid documents: {len(valid_documents)} ({len(documents) - len(valid_documents)} invalid)"
         )
+
+        filter_complex_metadata(valid_documents)
 
         return valid_documents
 
