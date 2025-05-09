@@ -17,7 +17,9 @@ class VectorStoreManager:
         self,
         persist_path: str = DATA_PATH,
         collection_name: str = VECTOR_STORE_COLLECTION_NAME,
+        max_tokens_per_request: int = 300000,
     ):
+        self.max_tokens_per_request = max_tokens_per_request
         self.vector_store_instance = Chroma(
             collection_name=collection_name,
             embedding_function=embedding_provider,
@@ -25,30 +27,111 @@ class VectorStoreManager:
         )
 
     def add_or_update_documents(self, documents: List[Document]):
-        ids = [str(d.metadata["id"]) for d in documents]
+        """Add or update documents in the vector store."""
+        if not documents or len(documents) == 0:
+            logger.error("No documents provided for database update")
+            return
 
-        print("documents", documents)
+        valid_documents = self.remove_invalid_documents(documents)
 
-        logger.info(f"Adding {len(documents)} new documents")
+        valid_documents = self.deduplicate_documents(valid_documents)
 
-        # Deduplicate documents
-        documents, ids = self.deduplicate_documents(documents, ids)
+        ids = self.get_ids(valid_documents)
 
-        # Add new documents
-        self.vector_store_instance.add_documents(documents=documents, ids=ids)
-        logger.info(f"Added {len(documents)} new documents")
+        logger.info(f"Updating database with {len(valid_documents)} documents")
+
+        # Split documents to avoid exceeding the max_tokens limit
+        added_ids = []
+        total_tokens = 0
+        limit_index = 0
+        last_added_index = 0
+        for idx, doc in enumerate(valid_documents):
+            if total_tokens + doc.metadata["tokens"] > self.max_tokens_per_request:
+                limit_index = idx
+            elif idx == len(valid_documents) - 1:
+                limit_index = idx
+
+            if limit_index > 0:
+                new_ids = self.vector_store_instance.add_documents(
+                    documents=valid_documents[last_added_index:idx],
+                    ids=ids[last_added_index:idx],
+                )
+                added_ids.extend(new_ids)
+
+                total_tokens = 0
+                last_added_index = idx
+            else:
+                total_tokens += doc.metadata["tokens"]
+
+        logger.info(
+            f"Added {len(added_ids)} new documents. {len(added_ids) / len(valid_documents) * 100}% of total valid documents"
+        )
+
+        return added_ids
 
     @staticmethod
-    def deduplicate_documents(documents, ids):
+    def remove_invalid_documents(documents: List[Document]) -> List[Document]:
+        """Remove invalid documents from the list."""
+        if len(documents) == 0:
+            logger.error("No valid documents provided for database update")
+            return []
+
+        valid_documents: List[Document] = []
+
+        for doc in documents:
+            if doc.metadata is None or "id" not in doc.metadata:
+                logger.debug(f"Document {doc} has no id or metadata")
+                continue
+            if not doc.page_content or len(doc.page_content) == 0:
+                logger.debug(f"Document {doc.id} has no content")
+                continue
+
+            for key, value in doc.metadata.items():
+                if not isinstance(value, bool) and not isinstance(
+                    value, (str, int, float)
+                ):
+                    logger.debug(
+                        f"Document {doc.id} has a metadata key {key} with a non-string, non-numeric, non-boolean value {value}"
+                    )
+                    continue
+
+            valid_documents.append(doc)
+
+        if len(valid_documents) != len(documents):
+            logger.warning(
+                f"Some documents were not added to the database because they were invalid. "
+                f"Total documents: {len(documents)}, Valid documents: {len(valid_documents)}"
+            )
+        logger.info(
+            f"Valid documents: {len(valid_documents)} ({len(documents) - len(valid_documents)} invalid)"
+        )
+
+        return valid_documents
+
+    @staticmethod
+    def deduplicate_documents(documents: List[Document]) -> List[Document]:
+        """Deduplicate documents by id."""
+        logger.info(f"Searching for duplicates in {len(documents)} documents")
         seen = set()
         unique_docs = []
-        unique_ids = []
-        for doc, id_ in zip(documents, ids):
-            if id_ not in seen:
+        for doc in documents:
+            if doc.metadata["id"] not in seen:
                 unique_docs.append(doc)
-                unique_ids.append(id_)
-                seen.add(id_)
-        return unique_docs, unique_ids
+                seen.add(doc.metadata["id"])
+
+        duplicates_count = len(documents) - len(unique_docs)
+
+        if duplicates_count > 0:
+            logger.info(f"Found {duplicates_count} duplicates")
+        else:
+            logger.info("No duplicates found")
+
+        return unique_docs
+
+    @staticmethod
+    def get_ids(documents: List[Document]) -> List[str]:
+        """Get ids from documents."""
+        return [doc.metadata["id"] for doc in documents]
 
     def get(self) -> Chroma:
         return self.vector_store_instance

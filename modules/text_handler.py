@@ -42,8 +42,12 @@ def bs4_extractor(html: str) -> str:
         if soup.find("html"):
             logger.debug("Parsed as HTML")
             soup = BeautifulSoup(html, "html.parser")
-        else:
+        elif soup.find("xml"):
             logger.debug("Parsed as XML")
+            soup = BeautifulSoup(html, "lxml-xml")
+        else:
+            logger.debug("Parsed as HTML - Fallback")
+            soup = BeautifulSoup(html, "html.parser")
     except Exception:
         logger.debug("Parsed as HTML - Fallback")
         soup = BeautifulSoup(html, "html.parser")
@@ -101,6 +105,10 @@ def load_site(urls: List[str]) -> Tuple[List[Document], List[int]]:
         list: A list of Document objects containing the loaded content
         list: A list of tokens per document
     """
+    if len(urls) == 0:
+        logger.warning("No URLs provided")
+        return [], []
+
     logger.info("Loading website...")
 
     docs = []
@@ -136,12 +144,18 @@ def load_site(urls: List[str]) -> Tuple[List[Document], List[int]]:
     for doc in tqdm(
         docs, desc="Counting tokens in documents", total=len(docs), unit="documents"
     ):
-        total_tokens += count_tokens(doc.page_content)
-        tokens_per_doc.append(count_tokens(doc.page_content))
+        document_tokens = count_tokens(doc.page_content)
+        total_tokens += document_tokens
+        tokens_per_doc.append(document_tokens)
+        # Add tokens per document to metadata
+        doc.metadata["tokens"] = document_tokens
 
     logger.info(f"Total tokens in loaded documents: {total_tokens}")
 
-    return docs, tokens_per_doc
+    logger.info(
+        f"Loaded {len(docs)} documents with an average of {total_tokens / len(docs)} tokens per document"
+    )
+    return docs, total_tokens
 
 
 def save_full_txt(documents: List[Document], save_file_path: str):

@@ -69,17 +69,27 @@ def generate_documents_from_sources(
 
     logger.info(f"Loading content from {len(urls)} URL's into documents ")
 
-    documents, tokens_per_doc = load_site(urls)
+    documents, total_tokens = load_site(urls)
+    if len(documents) == 0:
+        logger.warning("No documents were loaded")
+        return []
 
     logger.info(
-        f"Loaded {len(documents)} documents with an average of {sum(tokens_per_doc) / len(tokens_per_doc)} tokens per document"
+        f"Loaded {len(documents)} documents, resulting in {total_tokens} tokens"
     )
 
     if len(metadata.items()) > 0 and len(documents) > 0:
         # Add metadata to documents
         for document in documents:
+            # Add metadata to documents
             for key, value in metadata.items():
                 document.metadata[key] = value
+
+            for key, value in document.metadata.items():
+                if not isinstance(value, bool) and not isinstance(
+                    value, (str, int, float)
+                ):
+                    document.metadata[str(key)] = str(value)
 
     if save_file_path:
         logger.info(f"Saving documents to file {save_file_path}")
@@ -118,7 +128,7 @@ def test_vector_store(query: str = "How to submit a paper?"):
 
     for d in relevant_docs:
         logger.info(d.metadata["source"])
-        logger.info(d.page_content[0:500])
+        logger.info(d.page_content)
         logger.info("\n--------------------------------\n")
 
 

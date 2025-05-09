@@ -42,7 +42,7 @@ INITIAL_REPOSITORY_URLS = [
     # "https://github.com/RoboCup-SSL/ssl-match-stats",
     # "https://github.com/RoboCup-SSL/ssl-go-tools",
     # "https://github.com/RoboCup-SSL/ssl-rules",
-    "https://github.com/RoboCup-SSL/ssl-vision",
+    # "https://github.com/RoboCup-SSL/ssl-vision",
 ]
 
 
