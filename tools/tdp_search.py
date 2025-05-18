@@ -53,6 +53,13 @@ class TDPResultParagraph(BaseModel):
         description="List of questions related to the paragraph content.",
     )
 
+    def get_tdp_url(self):
+        base_url = "https://tdpsearch.com/#/tdp"
+
+        url = f"{base_url}/{self.tdp_name.league.name}__{self.tdp_name.year}__{self.tdp_name.team_name.name}__{self.tdp_name.index}"
+
+        return url
+
 
 class TDPResult(BaseModel):
     """Response type for TDPSearchTool."""
@@ -68,14 +75,16 @@ class TDPResult(BaseModel):
         """Convert the TDPResult to a pretty markdown string."""
         markdown = f"# TDP Search Results ({len(self.paragraphs)} paragraphs)\n\n"
         markdown += f"## Keywords: {', '.join(self.keywords)}\n\n"
-        markdown += "## Paragraphs found:\n\n"
+        markdown += "## Results found:\n\n"
 
         for index, paragraph in enumerate(self.paragraphs[:amount_of_paragraphs]):
-            markdown += f"### {index + 1}. {paragraph.tdp_name.year} TDP from {paragraph.tdp_name.team_name.name_pretty}  Team - {paragraph.title}\n\n"
-            markdown += f"**Content:**\n\n{paragraph.content}\n\n"
-            markdown += "- **Questions related to the content:**\n"
-            for question in paragraph.questions:
-                markdown += f"  - {question}\n"
+            markdown += f"### {index + 1}. TDP from {paragraph.tdp_name.team_name.name_pretty} Team - Paragraph {paragraph.title}\n\n"
+            markdown += f"**TDP Year:** {paragraph.tdp_name.year}\n\n"
+            markdown += f"**TDP URL:** {paragraph.get_tdp_url()}\n\n"
+            markdown += f"**TDP Content:**\n\n{paragraph.content}\n\n"
+            markdown += "**Questions related to the TDP content:**\n"
+            for idx, question in enumerate(paragraph.questions):
+                markdown += f"  - Q{idx + 1}: {question}\n"
             markdown += "\n"
 
         return markdown

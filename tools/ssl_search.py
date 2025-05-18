@@ -12,6 +12,10 @@ class SSLSearchCategories(Enum):
     RULES = "rules"
 
 
+vector_store_manager = VectorStoreManager()
+
+
+# @lru_cache(maxsize=1)
 def ssl_search_tool(
     query: str,
     k: int = 2,
@@ -25,25 +29,26 @@ def ssl_search_tool(
     - Provide the filter to retrieve documents from a specific source, if not provided, the tool will retrieve documents from all sources.
     - To get relevant documents, provide a query related to the RoboCUP SSL information.
 
-    Args:
-        query (str): The query to retrieve the most relevant documents from the RoboCUP SSL website, rules, and repository.
-        k (int): The number of documents to retrieve.
-        filter_source (str | None): The filter to apply to the documents.
-            - "website": Only retrieve documents from the RoboCUP SSL website.
-            - "rules": Only retrieve documents from the RoboCUP SSL rules.
-
-    Returns:
-        List[Document]: A list of documents that are the most relevant to the query.
     """
+    # Args:
+    #     query (str): The query to retrieve the most relevant documents from the RoboCUP SSL website, rules, and repository.
+    #     k (int): The number of documents to retrieve.
+    #     filter_source (str | None): The filter to apply to the documents.
+    #         - "website": Only retrieve documents from the RoboCUP SSL website.
+    #         - "rules": Only retrieve documents from the RoboCUP SSL rules.
 
-    vector_store_manager = VectorStoreManager()
+    # Returns:
+    #     List[Document]: A list of documents that are the most relevant to the query.
+
     vector_store = vector_store_manager.get()
 
     print(f"Filter: {filter_source}")
     print(f"Query: {query}")
     print(f"K: {k}")
 
-    documents = vector_store.similarity_search(query, k, filter_source)
+    documents = vector_store.similarity_search_with_relevance_scores(
+        query, k, {"score_threshold": 0.5, "filter": filter_source}
+    )
 
     logger.info(f"Retrieved {len(documents)} documents for query: {query}")
 
