@@ -8,10 +8,8 @@ from langchain_core.documents import Document
 
 from config import (
     DEFAULT_SITEMAP_URL,
-    FULL_REPOSITORY_FILE_PATH,
     FULL_RULES_FILE_PATH,
     FULL_WEBSITE_FILE_PATH,
-    INITIAL_REPOSITORY_URLS,
     INITIAL_RULES_URLS,
     URLS_FILE_PATH,
 )
@@ -163,16 +161,7 @@ def run_all_commands(query: str = "How to submit a paper?"):
         save_file_path=FULL_RULES_FILE_PATH,
     )
 
-    logger.info("Step 2.3: Updating repository documents")
-    repository_documents = generate_documents_from_sources(
-        INITIAL_REPOSITORY_URLS,
-        metadata={
-            "type": "repository",
-        },
-        save_file_path=FULL_REPOSITORY_FILE_PATH,
-    )
-
-    all_documents = website_documents + rules_documents + repository_documents
+    all_documents = website_documents + rules_documents
     logger.info(f"Total documents generated: {len(all_documents)}")
 
     # Step 3: Update database

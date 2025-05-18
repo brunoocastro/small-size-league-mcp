@@ -1,6 +1,17 @@
 from typing import List, Optional
 
+import requests
 from pydantic import BaseModel, Field
+
+
+class TDPSearchInput(BaseModel):
+    """Input schema for TDPSearchTool."""
+
+    query: str = Field(..., description="The search query to look up in TDP.")
+    leagues: List[str] = Field(
+        default=["soccer_smallsize"],
+        description="The leagues to search in. Defaults to soccer_smallsize.",
+    )
 
 
 class TDPLeague(BaseModel):
@@ -68,3 +79,48 @@ class TDPResult(BaseModel):
             markdown += "\n"
 
         return markdown
+
+
+def tdp_search_tool(query: str) -> str:
+    """
+    Searches through TDPs (Team Description Papers) for relevant insights about small size league soccer projects.
+    Useful for finding technical documentation, specifications, improvements and related information.
+
+    This tools calls the API provided at https://tdpsearch.com/ for the RoboTeamTwente open source project.
+    The original project is open source and available at https://github.com/emielsteerneman/TDP.
+
+    Args:
+        query: The search query to look up in TDP.
+    Returns:
+        The TDP search result in a pretty markdown format.
+    """
+
+    # URL to the TDP search API
+    base_url = "https://functionapp-test-dotenv-310.azurewebsites.net/api/query"
+    leagues = ["soccer_smallsize"]
+
+    params = {"query": query, "leagues": leagues}
+
+    try:
+        # Request to the TDP search API
+        response = requests.get(base_url, params=params)
+
+        # Raise an exception if the response is not successful
+        response.raise_for_status()
+
+        # Parse the JSON response
+        json_response = response.json()
+
+        print(f"JSON response: {json_response}")
+
+        # Create a TDPResult object from the JSON response
+        result = TDPResult(**json_response)
+
+        # Print the TDP search result in a pretty markdown format
+        print(f"\nTDP search result: \n{result.pretty_markdown()}\n")
+
+        # Return the TDP search result in a pretty markdown format
+        return result.pretty_markdown()
+    except requests.exceptions.RequestException:
+        # Return an error message if the TDP search API request fails
+        return "Error performing TDP search. Ignore this result."

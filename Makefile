@@ -5,4 +5,7 @@ server:
 	uv run mcp_server.py
 
 dev:
-	uv run mcp dev mcp_server.py
+	uv run fastmcp dev mcp_server.py
+
+inspector:
+	npx @modelcontextprotocol/inspector

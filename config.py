@@ -32,19 +32,6 @@ INITIAL_RULES_URLS = [
     "https://ssl.robocup.org/technical-overview-of-the-small-size-league/",
 ]
 
-INITIAL_REPOSITORY_URLS = [
-    # "https://github.com/orgs/RoboCup-SSL/repositories",
-    # "https://github.com/RoboCup-SSL/ssl-game-controller",
-    # "https://github.com/RoboCup-SSL/ssl-vision-client",
-    # "https://github.com/RoboCup-SSL/ssl-status-board",
-    # "https://github.com/RoboCup-SSL/ssl-remote-control",
-    # "https://github.com/RoboCup-SSL/ssl-simulation-setup",
-    # "https://github.com/RoboCup-SSL/ssl-match-stats",
-    # "https://github.com/RoboCup-SSL/ssl-go-tools",
-    # "https://github.com/RoboCup-SSL/ssl-rules",
-    # "https://github.com/RoboCup-SSL/ssl-vision",
-]
-
 
 # Sitemap URL
 DEFAULT_SITEMAP_URL = "https://ssl.robocup.org/page-sitemap.html"

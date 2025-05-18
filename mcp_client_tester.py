@@ -3,7 +3,7 @@ import asyncio
 # Verify if the server is running at localhost:8000
 from fastmcp import Client
 
-from mcp_server import server
+from mcp_server import mcp
 
 # All the content here is based on the [oficial documentation of the FastMCP project](https://gofastmcp.com/clients/client).
 # The goal of this file is to help us to test the FastMCP server using the client.
@@ -12,7 +12,7 @@ from mcp_server import server
 
 # 1. Test the python file (in-memory) server
 
-in_memory_client = Client(server)
+in_memory_client = Client(mcp)
 
 
 async def test_in_memory_server():

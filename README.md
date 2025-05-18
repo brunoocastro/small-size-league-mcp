@@ -19,6 +19,26 @@ To run this project locally, you will need:
   - [nomic-embed-text](https://ollama.com/library/nomic-embed-text) for text embedding
   - You can also change the providers directly through the [`providers.py`](./providers.py) file.
 
+## Quickstart (with Makefile)
+
+```bash
+# Install dependencies (if not done)
+uv venv && source .venv/bin/activate
+uv sync
+
+# Start the dev server (auto-reloads on changes)
+make dev
+
+# Or run the production server
+make server
+
+# Run the client tester
+make test_client
+
+# Launch the inspector (for debugging, requires npx)
+make inspector
+```
+
 ## Add into MCP Clients (Cursor, Windsurf, etc.)
 
 There are two different options to load the project content into the MCP clients:
@@ -73,7 +93,7 @@ There are two different options to load the project content into the MCP clients
 ```
 
 > PS: <LOCAL_PATH> relates to the path where the MCP server is located and the `mcp.py` file is located. You can use the `pwd` command to get the local path of the current directory.
-> PS2: To run the project you must (at least) uv installed and mcp command. Check the session setup bellow
+> PS2: To run the project you must (at least) uv installed and mcp command. Check the session setup below
 
 
 ## Setup
@@ -102,23 +122,6 @@ source .venv/bin/activate  # On Linux/macOS
 4. Install dependencies:
 ```bash
 uv sync
-```
-
-## Run MCP Server for development
-To run the MCP server locally, use the following command:
-
-```bash
-mcp dev mcp_server.py
-```
-
-And inside the interface you could use the command:
-```bash
-uv
-```
-
-and the Arguments:
-```bash
-run --with mcp mcp run mcp_server.py
 ```
 
 ## Development/Management Available Commands
