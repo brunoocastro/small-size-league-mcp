@@ -16,6 +16,7 @@ from config import (
 from modules.db_management import VectorStoreManager
 from modules.text_handler import load_site, save_full_txt, split_documents
 from modules.website_sources import extract_urls_from_sitemap, process_urls
+from tools.ssl_search import SSLDocumentSource
 
 logger = logging.getLogger(__name__)
 
@@ -145,7 +146,7 @@ def run_all_commands(query: str = "How to submit a paper?"):
     website_documents = generate_documents_from_sources(
         website_pages_urls,
         metadata={
-            "type": "website_page",
+            "type": SSLDocumentSource.WEBSITE.value,
             "reliability": 0.6,
         },
         save_file_path=FULL_WEBSITE_FILE_PATH,
@@ -155,7 +156,7 @@ def run_all_commands(query: str = "How to submit a paper?"):
     rules_documents = generate_documents_from_sources(
         INITIAL_RULES_URLS,
         metadata={
-            "type": "rules",
+            "type": SSLDocumentSource.RULES.value,
             "reliability": 1,
         },
         save_file_path=FULL_RULES_FILE_PATH,
