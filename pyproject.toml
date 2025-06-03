@@ -33,3 +33,6 @@ nlp = [
     "beautifulsoup4>=4.13.3",
     "lxml>=5.3.1",
 ]
+
+[tool.uv]
+default-groups = ["mcp-server"]
