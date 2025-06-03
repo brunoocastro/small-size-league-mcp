@@ -5,6 +5,10 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV UV_LINK_MODE=copy
 
+LABEL org.opencontainers.image.source=https://github.com/brunoocastro/small-size-league-mcp
+LABEL org.opencontainers.image.description="Small Size League MCP - A MCP Server for SSL Knowledge Base"
+LABEL org.opencontainers.image.licenses=MIT
+
 # Set work directory
 WORKDIR /app
 
