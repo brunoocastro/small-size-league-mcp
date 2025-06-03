@@ -31,6 +31,3 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository }}:latest
             ghcr.io/${{ github.repository }}:${{ github.sha }}
-
-      - name: Show image digest
-        run: echo "Image digest: ${{ steps.build-and-push.outputs.digest }}"
