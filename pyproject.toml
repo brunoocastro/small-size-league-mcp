@@ -24,6 +24,7 @@ dev = [
 mcp-server = [
     "fastmcp>=2.3.4",
     "langchain-chroma>=0.2.3",
+    "langchain-ollama>=0.3.0",
     "mcp[cli]>=1.9.0",
     "pydantic>=2.11.1",
     "requests>=2.32.3",

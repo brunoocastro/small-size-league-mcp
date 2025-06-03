@@ -2250,6 +2250,7 @@ dev = [
 mcp-server = [
     { name = "fastmcp" },
     { name = "langchain-chroma" },
+    { name = "langchain-ollama" },
     { name = "mcp", extra = ["cli"] },
     { name = "pydantic" },
     { name = "requests" },
@@ -2277,6 +2278,7 @@ dev = [
 mcp-server = [
     { name = "fastmcp", specifier = ">=2.3.4" },
     { name = "langchain-chroma", specifier = ">=0.2.3" },
+    { name = "langchain-ollama", specifier = ">=0.3.0" },
     { name = "mcp", extras = ["cli"], specifier = ">=1.9.0" },
     { name = "pydantic", specifier = ">=2.11.1" },
     { name = "requests", specifier = ">=2.32.3" },
