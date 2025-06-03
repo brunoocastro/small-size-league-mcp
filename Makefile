@@ -9,3 +9,12 @@ dev:
 
 inspector:
 	npx @modelcontextprotocol/inspector
+
+watch:
+	docker compose watch
+
+up:
+	docker compose up -d
+
+down:
+	docker compose down
