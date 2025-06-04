@@ -17,7 +17,9 @@ if settings.LLM_PROVIDER == LLM_Providers.OPENAI:
     )
 
     embedding_provider = OpenAIEmbeddings(
-        model=settings.EMBEDDING_MODEL, api_key=settings, base_url=settings.LLM_BASE_URL
+        model=settings.EMBEDDING_MODEL,
+        api_key=settings.LLM_API_KEY,
+        base_url=settings.LLM_BASE_URL,
     )
 else:
     from langchain_ollama import ChatOllama, OllamaEmbeddings

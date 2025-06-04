@@ -31,5 +31,5 @@ class MCP_Settings(BaseSettings):
     LLM_BASE_URL: Optional[str] = None
 
     # Hosting config
-    HOST: str = "localhost"
+    HOST: str = "0.0.0.0"
     PORT: int = 8888

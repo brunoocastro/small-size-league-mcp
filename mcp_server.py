@@ -123,5 +123,7 @@ if __name__ == "__main__":
         logger.info("Running in HTTP mode (default)")
 
     http_app = mcp.http_app(transport=transport_type)
-    uvicorn.run(http_app, host=settings.HOST, port=settings.PORT, log_level="DEBUG")
-    logger.info(f"MCP server started at http://{settings.HOST}:{settings.PORT}")
+    logger.info(
+        f"Starting MCP server on {settings.HOST}:{settings.PORT} with transport {transport_type}"
+    )
+    uvicorn.run(http_app, host=settings.HOST, port=settings.PORT)
