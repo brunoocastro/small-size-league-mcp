@@ -8,6 +8,7 @@ from fastmcp import FastMCP
 from requests import Request
 
 import config
+from settings import MCP_Settings
 from tools import ssl_search_tool, tdp_search_tool
 
 logger = getLogger(__name__)
@@ -113,6 +114,7 @@ async def health_check(request: Request) -> PlainTextResponse:
 
 
 if __name__ == "__main__":
+    settings = MCP_Settings()
     transport_type = "streamable-http"
     if os.getenv("TRANSPORT", "SSE") == "SSE":
         logger.info("Running in SSE mode")
@@ -121,4 +123,5 @@ if __name__ == "__main__":
         logger.info("Running in HTTP mode (default)")
 
     http_app = mcp.http_app(transport=transport_type)
-    uvicorn.run(http_app, host="0.0.0.0", port=8000)
+    uvicorn.run(http_app, host=settings.HOST, port=settings.PORT, log_level="DEBUG")
+    logger.info(f"MCP server started at http://{settings.HOST}:{settings.PORT}")

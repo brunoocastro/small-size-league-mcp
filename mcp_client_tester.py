@@ -1,6 +1,6 @@
 import asyncio
 
-# Verify if the server is running at localhost:8000
+# Verify if the server is running at localhost:8888
 from fastmcp import Client
 
 from mcp_server import mcp
@@ -53,7 +53,7 @@ print("-" * 6, "STARTING SSE SERVER", "-" * 6)
 print(
     "[SSE SERVER] You must run the server first. Run `python mcp_server.py` to start the server."
 )
-sse_client = Client("http://localhost:8000/sse")
+sse_client = Client("http://localhost:8888/sse")
 
 
 async def test_sse_server():

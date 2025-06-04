@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     container_name: ssl_mcp_server
     ports:
-      - "8000:8000"
+      - "8888:8888"
     env_file:
       - .env
     restart: on-failure

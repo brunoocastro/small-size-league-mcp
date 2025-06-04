@@ -29,3 +29,7 @@ class MCP_Settings(BaseSettings):
     LLM_MODEL: str = "gpt-4o-mini"
     EMBEDDING_MODEL: str = "text-embedding-3-small"
     LLM_BASE_URL: Optional[str] = None
+
+    # Hosting config
+    HOST: str = "localhost"
+    PORT: int = 8888
