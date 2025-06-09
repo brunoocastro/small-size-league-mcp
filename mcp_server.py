@@ -1,4 +1,3 @@
-import os
 from functools import lru_cache
 from logging import getLogger
 
@@ -115,15 +114,10 @@ async def health_check(request: Request) -> PlainTextResponse:
 
 if __name__ == "__main__":
     settings = MCP_Settings()
-    transport_type = "streamable-http"
-    if os.getenv("TRANSPORT", "SSE") == "SSE":
-        logger.info("Running in SSE mode")
-        transport_type = "sse"
-    else:
-        logger.info("Running in HTTP mode (default)")
 
-    http_app = mcp.http_app(transport=transport_type)
-    logger.info(
-        f"Starting MCP server on {settings.HOST}:{settings.PORT} with transport {transport_type}"
+    http_app = mcp.http_app(transport=settings.TRANSPORT_TYPE.value)
+
+    print(
+        f"Starting MCP server on {settings.HOST}:{settings.PORT} with transport {settings.TRANSPORT_TYPE.value}"
     )
-    uvicorn.run(http_app, host=settings.HOST, port=settings.PORT)
+    uvicorn.run(http_app, host=settings.HOST, port=settings.PORT, log_level="trace")

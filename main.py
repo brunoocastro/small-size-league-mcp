@@ -14,14 +14,19 @@ from config import (
     URLS_FILE_PATH,
 )
 from modules.db_management import VectorStoreManager
-from modules.text_handler import load_site, save_full_txt, split_documents
+from modules.text_handler import (
+    load_site,
+    save_full_txt,
+    split_documents,
+    update_metadata,
+)
 from modules.website_sources import extract_urls_from_sitemap, process_urls
 from tools.ssl_search import SSLDocumentSource
 
 logger = logging.getLogger(__name__)
 
 
-def update_website_sources(
+def get_updated_website_sources(
     sitemap_url: str = DEFAULT_SITEMAP_URL, output_file: str = URLS_FILE_PATH
 ) -> list[str]:
     """Update the website sources by processing the sitemap and saving URLs."""
@@ -69,33 +74,21 @@ def generate_documents_from_sources(
     logger.info(f"Loading content from {len(urls)} URL's into documents ")
 
     documents, total_tokens = load_site(urls)
-    if len(documents) == 0:
-        logger.warning("No documents were loaded")
-        return []
 
     logger.info(
         f"Loaded {len(documents)} documents, resulting in {total_tokens} tokens"
     )
 
-    if len(metadata.items()) > 0 and len(documents) > 0:
-        # Add metadata to documents
-        for document in documents:
-            # Add metadata to documents
-            for key, value in metadata.items():
-                document.metadata[key] = value
-
-            for key, value in document.metadata.items():
-                if not isinstance(value, bool) and not isinstance(
-                    value, (str, int, float)
-                ):
-                    document.metadata[str(key)] = str(value)
+    documents_with_metadata = update_metadata(
+        documents, metadata
+    )  # Update metadata for each document
 
     if save_file_path:
         logger.info(f"Saving documents to file {save_file_path}")
-        save_full_txt(documents=documents, save_file_path=save_file_path)
+        save_full_txt(documents=documents_with_metadata, save_file_path=save_file_path)
 
     # Split the documents into chunks
-    splits = split_documents(documents)
+    splits = split_documents(documents_with_metadata)
 
     logger.info("Document update completed. Returning splits.")
     return splits
@@ -137,7 +130,7 @@ def run_all_commands(query: str = "How to submit a paper?"):
 
     # Step 1: Update website sources
     logger.info(f"{'-' * 8}\nStep 1: Fetching website sources")
-    website_pages_urls = update_website_sources()
+    website_pages_urls = get_updated_website_sources()
 
     # Step 2: Update documents and save full text files
     logger.info(f"{'-' * 8}\nStep 2: Updating documents and saving full text files")
@@ -256,7 +249,7 @@ def main():
     )
 
     if args.command == "update-sources":
-        update_website_sources(args.sitemap_url, args.output)
+        get_updated_website_sources(args.sitemap_url, args.output)
     elif args.command == "update-documents":
         generate_documents_from_sources(args.sources, args.metadata)
     elif args.command == "update-database":

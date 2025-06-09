@@ -5,6 +5,12 @@ from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
+class TransportTypes(Enum):
+    STDIO = "stdio"
+    STREAMABLE_HTTP = "streamable-http"
+    SSE = "sse"
+
+
 class LLM_Providers(Enum):
     OPENAI = "openai"
     OLLAMA = "ollama"
@@ -33,3 +39,4 @@ class MCP_Settings(BaseSettings):
     # Hosting config
     HOST: str = "0.0.0.0"
     PORT: int = 8888
+    TRANSPORT_TYPE: TransportTypes = TransportTypes.STREAMABLE_HTTP

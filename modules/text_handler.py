@@ -152,9 +152,13 @@ def load_site(urls: List[str]) -> Tuple[List[Document], List[int]]:
 
     logger.info(f"Total tokens in loaded documents: {total_tokens}")
 
-    logger.info(
-        f"Loaded {len(docs)} documents with an average of {total_tokens / len(docs)} tokens per document"
-    )
+    if len(docs) == 0:
+        logger.warning("No documents were loaded")
+        return []
+    else:
+        logger.info(
+            f"Loaded {len(docs)} documents with an average of {total_tokens / len(docs)} tokens per document"
+        )
     return docs, total_tokens
 
 
@@ -178,6 +182,33 @@ def save_full_txt(documents: List[Document], save_file_path: str):
             f.write("\n\n" + "=" * 80 + "\n\n")
 
     logger.info(f"Documents concatenated and saved into {save_file_path}")
+
+
+def update_metadata(documents: List[Document], metadata: dict) -> List[Document]:
+    """
+    Update metadata for each document in the list.
+
+    Args:
+        documents (list): List of Document objects to update
+        metadata (dict): Metadata to add to each document
+
+    Returns:
+        list: Updated list of Document objects with new metadata
+    """
+    if len(metadata.items()) > 0 and len(documents) > 0:
+        # Add metadata to documents
+        for document in documents:
+            # Add metadata to documents
+            for key, value in metadata.items():
+                document.metadata[key] = value
+
+            for key, value in document.metadata.items():
+                if not isinstance(value, bool) and not isinstance(
+                    value, (str, int, float)
+                ):
+                    document.metadata[str(key)] = str(value)
+
+    return documents
 
 
 def split_documents(documents: List[Document]):

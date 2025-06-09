@@ -126,6 +126,10 @@ uv sync
 
 ## Development/Management Available Commands
 
+### Full pipeline overview
+
+![Full Pipeline Overview](assets/full_pipeline_overview.svg)
+
 The project provides several commands through `main.py`:
 
 ### Update Website Sources
