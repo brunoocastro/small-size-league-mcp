@@ -17,20 +17,21 @@ logger = getLogger(__name__)
 mcp = FastMCP("small-size-league-mcp")
 
 
-# Add tools
-mcp.add_tool(
-    fn=tdp_search_tool,
-    name="Team Description Paper Search",
+@mcp.tool(annotations={"name": "Team Description Paper Search"})
+def tdp_search(query: str) -> str:
+    return tdp_search_tool(query)
+
+
+@mcp.tool(
+    annotations={"name": "SSL Content Search"},
 )
-mcp.add_tool(
-    fn=ssl_search_tool,
-    name="SSL Content Search",
-)
+def ssl_search(query: str) -> str:
+    return ssl_search_tool(query)
 
 
 # Setup the resources
-@lru_cache(maxsize=128)
 @mcp.resource("full-text://urls")
+@lru_cache(maxsize=128)
 async def get_website_urls():
     """
     Retrieve the full list of website URLs.
@@ -44,8 +45,8 @@ async def get_website_urls():
     return urls
 
 
-@lru_cache(maxsize=128)
 @mcp.resource("full-text://website")
+@lru_cache(maxsize=128)
 async def get_full_website_text():
     """
     Retrieve the full text of the RoboCUP SSL website.
@@ -70,8 +71,8 @@ async def get_full_website_text():
     return full_website_text
 
 
-@lru_cache(maxsize=128)
 @mcp.resource("full-text://rules")
+@lru_cache(maxsize=128)
 async def get_full_rules_text():
     """
     Retrieve the full text of the RoboCUP SSL rules.
@@ -90,8 +91,8 @@ async def get_full_rules_text():
     return full_rules_text
 
 
-@lru_cache(maxsize=128)
 @mcp.resource("full-text://repository")
+@lru_cache(maxsize=128)
 async def get_full_repository_text():
     """
     Retrieve the full text of the RoboCUP SSL repository.

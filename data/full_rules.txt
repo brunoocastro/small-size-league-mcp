@@ -1,348 +1,11 @@
 
 DOCUMENT 1
-SOURCE: https://ssl.robocup.org/rules/
-ID: Unknown ID
-TYPE: rules
-CONTENT:
-The rules of the Small Size League are maintained by the Technical and Organizing Committee. Please contact the Technical Committee for any questions regarding the rules.
-The source code for the rule book is maintained on 
-Github
-.
-Rulebook for 2025
-The full text of the rule book is available in both HTML format optimized for viewing on electronic devices and as a PDF for printing.
-Rules (HTML)
-Rules (PDF)
-Rule Diff
-Rule changes
-This is a short summary of the changes in the rules from 2024 to 2025.
-Requires that robots physically touched during Timeout have to be removed from the field (
-#88
-)
-Clarify that robots may not be physically moved during any part of the match, except for moving robots into or our of the field (
-#88
-)
-Teams must have interchangeable bright and darks hulls. Hulls must cover at least 6cm of the robot’s height, be non-reflective, and avoid vision system colors (
-#8
-6
-, 
-#92
-)
-If a team has Robot Too Close to Opponent Defense Area twice while the game is stopped or during a Free Kick, the game is halted immediately (
-#91
-)
-Rule History
-The following sections contain references to the rulebooks of previous years and a brief summary of the changes in that year. Note that the summary is not guaranteed to be complete. Have a look at the documents containing the exact differences for details.
-RoboCup 2024 in Eindhoven, Netherlands
-Rules 2024 (HTML)
- | 
-Rules 2024 (PDF)
-Limit robots in Division A during group phase to 8, if desired by one team (
-#71
-)
-Change constraint for automatic robot substitution (
-#74
-)
-Add a punishment for excessive robot substitution (
-#78
-, 
-#80
-)
-Increase substitution time from 10s to 20s (
-#81
-)
-Some small improvements in rule wording (
-#77
-, 
-#83
-)
-RoboCup 2023 in Bordeaux, France
-Rules 2023 (HTML)
- | 
-Rules 2023 (PDF)
-Define a larger grace period after halt for robot preparation (
-#58
-)
-Only count one foul per ball placement for interference (
-#59
-)
-Do not limit emergency stop to division A (
-#66
-)
-More explicit field coloring (
-#54
-)
-Add the tracker protocol (
-#60
-)
-Add guidance for referees on unsporting behavior (
-#62
-)
-Add diagrams for game states, referee commands and game events (
-#63
-, 
-#64
-)
-Some small improvements in rule wording (
-#55
-, 
-#56
-, 
-#57
-, 
-#65
-)
-RoboCup 2022 in Bangkok, Thailand
-Rules 2022 (HTML)
- | 
-Rules 2022 (PDF)
-Add advantage choice rule (again) (
-#42
-)
-Better tie-breaking during shoot-out phase (
-#43
-)
-Exclude shoot-out from early termination rule (
-#48
-)
-Add goal difference of more than one to early termination rule (
-#48
-)
-Several small improvement in rule wording
-RoboCup 2021 Worldwide
-Rules 2021 (HTML)
- | 
-Rules 2021 (PDF)
-Increase number of robots in division A to 11 (
-#6
-)
-Increase defense area and goal sizes (
-#30
-)
-Replace indirect free kick by direct free kick (
-#3
-)
-Chipping ball out of field is now a foul (
-#5
-)
-Goalkeeper may be changed while ball is in play, if ball is in opponent half (
-#7
-)
-Robots can be substituted while ball is in play (
-#9
-)
-Game is not stopped for cards (
-#10
-)
-Introduce the “emergency stop” (
-#11
-)
-Replace the current penalty kick procedure by the one-on-one shootout procedure (
-#14
-)
-Turn multiple yellow cards into red cards instead of penalty kicks (
-#15
-)
-Introduce communication flags (
-#26
-)
-Introduce challenge flags (
-#27
-)
-Resume at the location of the ball when play is stopped after a foul (
-#29
-)
-Ball placement is not always required anymore (
-#31
-)
-The ball placement counter is decremented on failures, not reset (
-#31
-)
-Fouls and offenses restructured (
-#32
-)
-Stopping vs. non-stopping fouls
-Only stop the game for a limited set of fouls
-Game continues automatically 5s / 10s after a direct free kick and kick off
-Remove foul “Attacker touched opponent in opponent defense area”
-Remove foul “Defender partially in own defense area”
-RoboCup 2019 in Sydney, Australia
-Rules 2019 (HTML)
- | 
-Rules 2019 (PDF)
-Rulebook has been completely rewritten into a new structure
-The Game Controller replaces the Referee Box
-Dribbling devices that transfer a non-horizontal spin to the ball are permitted
-The 10-0 early termination rule changes from a 10 goal advantage to 10 goals shot
-The distance to field lines is doubled for all free kick positions
-Scoring a goal from a indirect free kick requires a second ball contact of an attacking robot
-The match continues after a penalty shot
-The ball placement procedure is reworked
-The stop speed limit does not apply to automatic ball placement any more
-The aimless kick rule is no longer applied in division A
-Lack of progress: Not shooting the free kick in time now results in an indirect free kick for the other team instead of a force start
-The maximum allowed time to bring the ball into play is reduced to 10 seconds for division B and 5 seconds for division A. (It was 15 seconds)
-Touching an opponent inside the own defense area no longer results in a penalty
-Every third foul will result in a yellow card. There is a single counter that increases whenever a team commits a foul regardless of the type of foul
-The minimum 0.2m distance to the opponent defense area also applies to stop
-The match continues when robots crash with similar speed
-Pushing is independent of the ball
-Tipping over or dropping parts now counts as a foul
-Showing lack of respect is defined as unsporting behavior
-If an offense happens while the ball is out of play, the free kick type and position will not be overridden
-Robot substitution is refactored
-Robot substitution requires the match to be halted
-RoboCup 2018 in Montreal, Canada
-Rulebook
- | 
-differences to previous year
-Introduction of Divisions
-Increase field size from 9x6m to 12x9m for DivA
-Increase goal size for DivA from 1.0m to 1.2m
-Increase number of robots for DivA from 6 to 8
-Rectangular defense area (2.4×1.2m DivA, 2.0×1.0m DivB, before: 2×1.0m quarter circle + 1.0×0.5m rectangle
-Reduce game time from 10 to 5 minutes, game time only counts down when ball is in play
-Mandatory use of an autoRef
-Robots have to be completely in their own half during kickoff
-Robots do not need to move the ball forward during kickoff
-Mandatory ball placement for DivA teams
-Forbid chip-kick goals
-Reduce maximum ball speed from 8 to 6.5m/s
-Every third yellow card results in a penalty kick
-Add a measurable definition for robot crashes
-Punish collisions with yellow cards
-Shoot-out procedure rewritten
-RoboCup 2017 in Nagoya, Japan
-Rulebook
- | 
-differences to previous year
-Introduction of automatic ball placement by teams
-Robots interchanged at the halfway line can replaced immediately, otherwise teams have to wait for the next stoppage
-Robots are allowed to enter the center circle during kickoff
-Forbid pushing of opponent robots
-Introduction of the one-on-one penalty shoot-out
-RoboCup 2016 in Leipzig, Germany
-Rulebook
- | 
-differences to previous year
-Only minor changes to formulation
-RoboCup 2015 in Hefei, China
-Rulebook
- | 
-differences to previous year
-Mandatory new field size of 9x6m (with 10% variation)
-Increase defense area from 0.8m radius to 1.0m radius and width from 1.95m to 2.5m.
-Increase goal width from 0.7m to 1.0m
-Introduction of standard color paper for robot patterns that have to be bought by teams before the competition
-Maximum dribbling distance is increased from 0.5m to 1.0m
-Forbid touching the ball in the opponent defense area
-Introduce the carpeting rule
-Robot speed limit during stop increased from 1.0m/s to 1.5m/s
-RoboCup 2014 in João Pessoa, Brazil
-Rulebook
- | 
-differences to previous year
-Introduction of an optional increased field size (double-size field) (6x4m to 8x6m)
-Increase defense area for double-size field from 0.8m radius to 1.0m radius and width from 1.95m to 2.5m.
-Increase goal width for double-size field from 0.7m to 1.0m
-Timeouts increased when playing on double-size field: 6 timeouts and 7.5 minutes
-Ball must be touched for the multiple defender rule now (ball inside defense area was sufficient before)
-Touching the ball while being partially within the defense area is a foul now
-Introduce robot speed limit of 1m/s during stop
-RoboCup 2013 in Eindhoven, Netherlands
-Rulebook
- | 
-differences to previous year
-Introduce multiple defender rule and punish it with a penalty kick
-RoboCup 2012 in Mexico City, Mexico
-Rulebook
- | 
-differences to previous year
-Increase defense area; radius from 0.5m to 0.8m, width from 1.35m to 1.95m
-Increase number of robots from 5 to 6
-Damaged robots result in an indirect free kick
-Reduce maximum ball speed from 10 to 8m/s
-RoboCup 2011 in Istanbul, Turkey
-Rulebook
- | 
-differences to previous year
-No changes
-RoboCup 2010 in Singapore, Singapore
-Rulebook
- | 
-differences to previous year
-Introduction of the shared vision system
-RoboCup 2009 in Graz, Austria
-Rulebook
- | 
-differences to previous year
-Reduce field size from 6.1×4.2m to 6.05×4.05m
-Introduce the referee walking area
-Reduce the maximum robot height to 0.15m for all robots
-Reduce playing time from 15 to 10 minutes per half
-Reduce the timeout time from 10 to 5 minutes
-RoboCup 2008 in Suzhou, China
-Rulebook
- | 
-differences to previous year
-Increase field size from 5×3.5m to 6.1×4.2m
-Add a rectangle between the two quarter circles of the defense area (increase width by 0.35m)
-Add penalty shoot-out
-RoboCup 2007 in Atlanta, USA
-Rulebook
- | 
-differences to previous year
-Increase field size from 4.9×3.4m to 5×3.5m
-Allow the use of an autonomous referee
-Forbid attackers to be closer than 0.2m to the opponent defense area during free kicks
-Introduce a maximum ball speed of 10m/s
-RoboCup 2006
-Rulebook
-Questions or Clarifications
-Questions regarding the rules should be sent to the 
-Technical Committee.
-
-================================================================================
-
-
-DOCUMENT 2
-SOURCE: https://ssl.robocup.org/tournament-rules/
-ID: Unknown ID
-TYPE: rules
-CONTENT:
-All teams must adhere to these formalized guidelines to ensure a smooth and successful competition. While some protocols have been used in past competitions, this page consolidates and clarifies them to maintain organization throughout the event.
-Radio Setup
-Each team must only use the radio frequencies assigned during the competition.
-The 2024 Radio Frequency form is sent by the OC or TC a few weeks before the RoboCup at 
-Discord and Mailing list
-.
-Based on the team’s responses, TC will assign a radio frequency to be used during the competition.
-Poster Presentation
-Each Division A team must bring a poster presentation with its development and innovations to the competition.
-Division B teams are highly encouraged to bring posters and present.
-Poster aims to maximize the effectiveness of ETDPs and TDPs.
-The poster must be roughly one square meter (A0) and will be hung up in the RoboCup venue.
-Practice
-During the competition, at least one field will be assigned to practice. Each team will have a few half-field 30-minute slots per day.
-The number of slots varies depending on the number of teams, field availability, and competition schedule.
-If your team needs the whole field, you should book 2 field halves simultaneously. Note that you will consume two slots in 30 minutes.
-Pre-Game
-Each game has 4 teams involved: 2 teams playing, one assigned as Referee and Game Controller, and another as Assistant Referee and Vision Expert. Every team should arrive at the field 15 minutes before the schedule, as the kickoff should start at the scheduled time.
-If the previous game is delayed, the 15 minutes should start when the previous game finishes. Therefore, referees and teams have at least 15 minutes to prepare for the game.
-In the 15 minutes, GC, Referee, Assistant Referee, and Vision Expoert should verify the SSL-Vision, auto-referee, set up the Game Controller, and score sheet, get an official ball, and verify the two playing teams.
-At the match schedule time, 
-if one of the teams is not ready to play, they should use their timeout.
- If the timeout ends, the referee can ask TC/OC for their opinion before enforcing a forced forfeit.
-
-================================================================================
-
-
-DOCUMENT 3
 SOURCE: https://robocup-ssl.github.io/ssl-rules/sslrules.html
 ID: Unknown ID
 TYPE: rules
 CONTENT:
 Rules of the RoboCup Small Size League
-2025-02-22
+2025-06-23
 Table of Contents
 1. League Overview
 1.1. Committees
@@ -375,7 +38,7 @@ Penalty Mark
 3.2. Hardware And Software Constraints
 3.2.1. Safety
 3.2.2. Shape
-3.2.3. Hull Color of Robots
+3.2.3. Color of Robots
 3.2.4. Dribbling Device
 3.2.5. Vision Pattern
 3.2.6. Radio Communication
@@ -697,20 +360,22 @@ referee
  has to force a team to remove a robot from the field if he considers it a potential safety threat.
 3.2.2. Shape
 A robot must fit inside a 0.18 meters wide and 0.15 meters high cylinder at any point in time. Additionally, the top of the robot must adhere to the standard pattern size and surface constraints.
-3.2.3. Hull Color of Robots
-To ensure clarity and effective identification during gameplay, the following rules apply to the coloring of robot hulls:
-Bright and dark color scheme:
-All robots from a team must have interchangeable hull colors: one bright and one dark.
-These two colors must be the same for all robots in a team.
-The color must vertically cover at least 6 cm of the robot’s maximum height.
-Coverage requirements:
-The robot hull must not be reflective to avoid interfering with the vision system.
-The robot hull must avoid colors close to the ones used at 
+3.2.3. Color of Robots
+To ensure clear identification during gameplay, robots must be visually distinguishable from the opposing team. The following rules apply:
+Color scheme requirements:
+Robots must have distinctive coloring covering at least 20% of the robot’s surrounding area (bottom and top surfaces do not count).
+The color must be partially visible from all sides.
+All robots from a team must have interchangeable colors: one bright and one dark.
+These two colors must be consistent across all robots on the same team.
+Design and durability requirements:
+Teams may use creative patterns to distinguish their robots from other teams.
+Robot color must not be reflective, and the top surface should be black to avoid vision system interference.
+Robot sides must avoid colors similar to those used in the 
 vision pattern
  and 
 ball
 .
-Colors must adhere properly and remain durable to prevent dropping or peeling during the match. If the color cover drops, it will be penalized accordingly (see 
+Colors must be properly applied and durable throughout the match to prevent peeling or detachment. If color covering detaches during play, penalties will apply (see 
 Tipping Over Or Dropping Parts
 ).
 3.2.4. Dribbling Device
@@ -2146,7 +1811,344 @@ The
 aimless kick
  rule only applies to division B.
 Division A has shorter timeouts in some situations.
-Last updated 2025-02-22 21:17:59 UTC
+Last updated 2025-06-23 16:50:11 UTC
+
+================================================================================
+
+
+DOCUMENT 2
+SOURCE: https://ssl.robocup.org/rules/
+ID: Unknown ID
+TYPE: rules
+CONTENT:
+The rules of the Small Size League are maintained by the Technical and Organizing Committee. Please contact the Technical Committee for any questions regarding the rules.
+The source code for the rule book is maintained on 
+Github
+.
+Rulebook for 2025
+The full text of the rule book is available in both HTML format optimized for viewing on electronic devices and as a PDF for printing.
+Rules (HTML)
+Rules (PDF)
+Rule Diff
+Rule changes
+This is a short summary of the changes in the rules from 2024 to 2025.
+Requires that robots physically touched during Timeout have to be removed from the field (
+#88
+)
+Clarify that robots may not be physically moved during any part of the match, except for moving robots into or our of the field (
+#88
+)
+Teams must have interchangeable bright and darks hulls. Hulls must cover at least 6cm of the robot’s height, be non-reflective, and avoid vision system colors (
+#8
+6
+, 
+#92
+)
+If a team has Robot Too Close to Opponent Defense Area twice while the game is stopped or during a Free Kick, the game is halted immediately (
+#91
+)
+Rule History
+The following sections contain references to the rulebooks of previous years and a brief summary of the changes in that year. Note that the summary is not guaranteed to be complete. Have a look at the documents containing the exact differences for details.
+RoboCup 2024 in Eindhoven, Netherlands
+Rules 2024 (HTML)
+ | 
+Rules 2024 (PDF)
+Limit robots in Division A during group phase to 8, if desired by one team (
+#71
+)
+Change constraint for automatic robot substitution (
+#74
+)
+Add a punishment for excessive robot substitution (
+#78
+, 
+#80
+)
+Increase substitution time from 10s to 20s (
+#81
+)
+Some small improvements in rule wording (
+#77
+, 
+#83
+)
+RoboCup 2023 in Bordeaux, France
+Rules 2023 (HTML)
+ | 
+Rules 2023 (PDF)
+Define a larger grace period after halt for robot preparation (
+#58
+)
+Only count one foul per ball placement for interference (
+#59
+)
+Do not limit emergency stop to division A (
+#66
+)
+More explicit field coloring (
+#54
+)
+Add the tracker protocol (
+#60
+)
+Add guidance for referees on unsporting behavior (
+#62
+)
+Add diagrams for game states, referee commands and game events (
+#63
+, 
+#64
+)
+Some small improvements in rule wording (
+#55
+, 
+#56
+, 
+#57
+, 
+#65
+)
+RoboCup 2022 in Bangkok, Thailand
+Rules 2022 (HTML)
+ | 
+Rules 2022 (PDF)
+Add advantage choice rule (again) (
+#42
+)
+Better tie-breaking during shoot-out phase (
+#43
+)
+Exclude shoot-out from early termination rule (
+#48
+)
+Add goal difference of more than one to early termination rule (
+#48
+)
+Several small improvement in rule wording
+RoboCup 2021 Worldwide
+Rules 2021 (HTML)
+ | 
+Rules 2021 (PDF)
+Increase number of robots in division A to 11 (
+#6
+)
+Increase defense area and goal sizes (
+#30
+)
+Replace indirect free kick by direct free kick (
+#3
+)
+Chipping ball out of field is now a foul (
+#5
+)
+Goalkeeper may be changed while ball is in play, if ball is in opponent half (
+#7
+)
+Robots can be substituted while ball is in play (
+#9
+)
+Game is not stopped for cards (
+#10
+)
+Introduce the “emergency stop” (
+#11
+)
+Replace the current penalty kick procedure by the one-on-one shootout procedure (
+#14
+)
+Turn multiple yellow cards into red cards instead of penalty kicks (
+#15
+)
+Introduce communication flags (
+#26
+)
+Introduce challenge flags (
+#27
+)
+Resume at the location of the ball when play is stopped after a foul (
+#29
+)
+Ball placement is not always required anymore (
+#31
+)
+The ball placement counter is decremented on failures, not reset (
+#31
+)
+Fouls and offenses restructured (
+#32
+)
+Stopping vs. non-stopping fouls
+Only stop the game for a limited set of fouls
+Game continues automatically 5s / 10s after a direct free kick and kick off
+Remove foul “Attacker touched opponent in opponent defense area”
+Remove foul “Defender partially in own defense area”
+RoboCup 2019 in Sydney, Australia
+Rules 2019 (HTML)
+ | 
+Rules 2019 (PDF)
+Rulebook has been completely rewritten into a new structure
+The Game Controller replaces the Referee Box
+Dribbling devices that transfer a non-horizontal spin to the ball are permitted
+The 10-0 early termination rule changes from a 10 goal advantage to 10 goals shot
+The distance to field lines is doubled for all free kick positions
+Scoring a goal from a indirect free kick requires a second ball contact of an attacking robot
+The match continues after a penalty shot
+The ball placement procedure is reworked
+The stop speed limit does not apply to automatic ball placement any more
+The aimless kick rule is no longer applied in division A
+Lack of progress: Not shooting the free kick in time now results in an indirect free kick for the other team instead of a force start
+The maximum allowed time to bring the ball into play is reduced to 10 seconds for division B and 5 seconds for division A. (It was 15 seconds)
+Touching an opponent inside the own defense area no longer results in a penalty
+Every third foul will result in a yellow card. There is a single counter that increases whenever a team commits a foul regardless of the type of foul
+The minimum 0.2m distance to the opponent defense area also applies to stop
+The match continues when robots crash with similar speed
+Pushing is independent of the ball
+Tipping over or dropping parts now counts as a foul
+Showing lack of respect is defined as unsporting behavior
+If an offense happens while the ball is out of play, the free kick type and position will not be overridden
+Robot substitution is refactored
+Robot substitution requires the match to be halted
+RoboCup 2018 in Montreal, Canada
+Rulebook
+ | 
+differences to previous year
+Introduction of Divisions
+Increase field size from 9x6m to 12x9m for DivA
+Increase goal size for DivA from 1.0m to 1.2m
+Increase number of robots for DivA from 6 to 8
+Rectangular defense area (2.4×1.2m DivA, 2.0×1.0m DivB, before: 2×1.0m quarter circle + 1.0×0.5m rectangle
+Reduce game time from 10 to 5 minutes, game time only counts down when ball is in play
+Mandatory use of an autoRef
+Robots have to be completely in their own half during kickoff
+Robots do not need to move the ball forward during kickoff
+Mandatory ball placement for DivA teams
+Forbid chip-kick goals
+Reduce maximum ball speed from 8 to 6.5m/s
+Every third yellow card results in a penalty kick
+Add a measurable definition for robot crashes
+Punish collisions with yellow cards
+Shoot-out procedure rewritten
+RoboCup 2017 in Nagoya, Japan
+Rulebook
+ | 
+differences to previous year
+Introduction of automatic ball placement by teams
+Robots interchanged at the halfway line can replaced immediately, otherwise teams have to wait for the next stoppage
+Robots are allowed to enter the center circle during kickoff
+Forbid pushing of opponent robots
+Introduction of the one-on-one penalty shoot-out
+RoboCup 2016 in Leipzig, Germany
+Rulebook
+ | 
+differences to previous year
+Only minor changes to formulation
+RoboCup 2015 in Hefei, China
+Rulebook
+ | 
+differences to previous year
+Mandatory new field size of 9x6m (with 10% variation)
+Increase defense area from 0.8m radius to 1.0m radius and width from 1.95m to 2.5m.
+Increase goal width from 0.7m to 1.0m
+Introduction of standard color paper for robot patterns that have to be bought by teams before the competition
+Maximum dribbling distance is increased from 0.5m to 1.0m
+Forbid touching the ball in the opponent defense area
+Introduce the carpeting rule
+Robot speed limit during stop increased from 1.0m/s to 1.5m/s
+RoboCup 2014 in João Pessoa, Brazil
+Rulebook
+ | 
+differences to previous year
+Introduction of an optional increased field size (double-size field) (6x4m to 8x6m)
+Increase defense area for double-size field from 0.8m radius to 1.0m radius and width from 1.95m to 2.5m.
+Increase goal width for double-size field from 0.7m to 1.0m
+Timeouts increased when playing on double-size field: 6 timeouts and 7.5 minutes
+Ball must be touched for the multiple defender rule now (ball inside defense area was sufficient before)
+Touching the ball while being partially within the defense area is a foul now
+Introduce robot speed limit of 1m/s during stop
+RoboCup 2013 in Eindhoven, Netherlands
+Rulebook
+ | 
+differences to previous year
+Introduce multiple defender rule and punish it with a penalty kick
+RoboCup 2012 in Mexico City, Mexico
+Rulebook
+ | 
+differences to previous year
+Increase defense area; radius from 0.5m to 0.8m, width from 1.35m to 1.95m
+Increase number of robots from 5 to 6
+Damaged robots result in an indirect free kick
+Reduce maximum ball speed from 10 to 8m/s
+RoboCup 2011 in Istanbul, Turkey
+Rulebook
+ | 
+differences to previous year
+No changes
+RoboCup 2010 in Singapore, Singapore
+Rulebook
+ | 
+differences to previous year
+Introduction of the shared vision system
+RoboCup 2009 in Graz, Austria
+Rulebook
+ | 
+differences to previous year
+Reduce field size from 6.1×4.2m to 6.05×4.05m
+Introduce the referee walking area
+Reduce the maximum robot height to 0.15m for all robots
+Reduce playing time from 15 to 10 minutes per half
+Reduce the timeout time from 10 to 5 minutes
+RoboCup 2008 in Suzhou, China
+Rulebook
+ | 
+differences to previous year
+Increase field size from 5×3.5m to 6.1×4.2m
+Add a rectangle between the two quarter circles of the defense area (increase width by 0.35m)
+Add penalty shoot-out
+RoboCup 2007 in Atlanta, USA
+Rulebook
+ | 
+differences to previous year
+Increase field size from 4.9×3.4m to 5×3.5m
+Allow the use of an autonomous referee
+Forbid attackers to be closer than 0.2m to the opponent defense area during free kicks
+Introduce a maximum ball speed of 10m/s
+RoboCup 2006
+Rulebook
+Questions or Clarifications
+Questions regarding the rules should be sent to the 
+Technical Committee.
+
+================================================================================
+
+
+DOCUMENT 3
+SOURCE: https://ssl.robocup.org/tournament-rules/
+ID: Unknown ID
+TYPE: rules
+CONTENT:
+All teams must adhere to these formalized guidelines to ensure a smooth and successful competition. While some protocols have been used in past competitions, this page consolidates and clarifies them to maintain organization throughout the event.
+Radio Setup
+Each team must only use the radio frequencies assigned during the competition.
+The 2024 Radio Frequency form is sent by the OC or TC a few weeks before the RoboCup at 
+Discord and Mailing list
+.
+Based on the team’s responses, TC will assign a radio frequency to be used during the competition.
+Poster Presentation
+Each Division A team must bring a poster presentation with its development and innovations to the competition.
+Division B teams are highly encouraged to bring posters and present.
+Poster aims to maximize the effectiveness of ETDPs and TDPs.
+The poster must be roughly one square meter (A0) and will be hung up in the RoboCup venue.
+Practice
+During the competition, at least one field will be assigned to practice. Each team will have a few half-field 30-minute slots per day.
+The number of slots varies depending on the number of teams, field availability, and competition schedule.
+If your team needs the whole field, you should book 2 field halves simultaneously. Note that you will consume two slots in 30 minutes.
+Pre-Game
+Each game has 4 teams involved: 2 teams playing, one assigned as Referee and Game Controller, and another as Assistant Referee and Vision Expert. Every team should arrive at the field 15 minutes before the schedule, as the kickoff should start at the scheduled time.
+If the previous game is delayed, the 15 minutes should start when the previous game finishes. Therefore, referees and teams have at least 15 minutes to prepare for the game.
+In the 15 minutes, GC, Referee, Assistant Referee, and Vision Expoert should verify the SSL-Vision, auto-referee, set up the Game Controller, and score sheet, get an official ball, and verify the two playing teams.
+At the match schedule time, 
+if one of the teams is not ready to play, they should use their timeout.
+ If the timeout ends, the referee can ask TC/OC for their opinion before enforcing a forced forfeit.
 
 ================================================================================
 

@@ -7,7 +7,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class TransportTypes(Enum):
     STDIO = "stdio"
-    STREAMABLE_HTTP = "streamable-http"
+    STREAMABLE_HTTP = "http"
     SSE = "sse"
 
 

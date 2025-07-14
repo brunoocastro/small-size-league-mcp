@@ -15,7 +15,6 @@ class SSLDocumentSource(Enum):
 vector_store_manager = VectorStoreManager()
 
 
-# @lru_cache(maxsize=1)
 def ssl_search_tool(
     query: str,
     k: int = 2,
