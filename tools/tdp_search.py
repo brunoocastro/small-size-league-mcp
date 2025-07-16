@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-import requests
+import httpx
 from pydantic import BaseModel, Field
 
 
@@ -90,7 +90,7 @@ class TDPResult(BaseModel):
         return markdown
 
 
-def tdp_search_tool(query: str) -> str:
+async def tdp_search_tool(query: str) -> str:
     """
     Searches through TDPs (Team Description Papers) for relevant insights about small size league soccer projects.
     Useful for finding technical documentation, specifications, improvements and related information.
@@ -111,8 +111,9 @@ def tdp_search_tool(query: str) -> str:
     params = {"query": query, "leagues": leagues}
 
     try:
-        # Request to the TDP search API
-        response = requests.get(base_url, params=params)
+        # Request to the TDP search API using httpx async client
+        async with httpx.AsyncClient() as client:
+            response = await client.get(base_url, params=params)
 
         # Raise an exception if the response is not successful
         response.raise_for_status()
@@ -130,6 +131,6 @@ def tdp_search_tool(query: str) -> str:
 
         # Return the TDP search result in a pretty markdown format
         return result.pretty_markdown()
-    except requests.exceptions.RequestException:
+    except httpx.RequestError:
         # Return an error message if the TDP search API request fails
         return "Error performing TDP search. Ignore this result."

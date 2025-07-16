@@ -1,6 +1,7 @@
 # ENUM for filters
 from enum import Enum
 from logging import getLogger
+from typing import Optional
 
 from modules.db_management import VectorStoreManager
 
@@ -18,7 +19,7 @@ vector_store_manager = VectorStoreManager()
 def ssl_search_tool(
     query: str,
     k: int = 2,
-    document_source_filter: SSLDocumentSource | None = None,
+    document_source_filter: Optional[SSLDocumentSource] = None,
     threshold: float = 0,
 ):
     """
