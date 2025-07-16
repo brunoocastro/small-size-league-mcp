@@ -17,7 +17,7 @@ WORKDIR /app
 COPY . .
 
 # Sync the project into a new environment, asserting the lockfile is up to date
-RUN uv sync --locked --group mcp-server
+RUN uv sync --locked
 
 EXPOSE 8888
 

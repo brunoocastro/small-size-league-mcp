@@ -4,6 +4,7 @@ from logging import getLogger
 import uvicorn
 from fastapi.responses import PlainTextResponse
 from fastmcp import FastMCP
+from fastmcp.tools import Tool
 from requests import Request
 
 import config
@@ -17,16 +18,10 @@ logger = getLogger(__name__)
 mcp = FastMCP("small-size-league-mcp")
 
 
-@mcp.tool(annotations={"name": "Team Description Paper Search"})
-def tdp_search(query: str) -> str:
-    return tdp_search_tool(query)
-
-
-@mcp.tool(
-    annotations={"name": "SSL Content Search"},
+mcp.add_tool(Tool.from_function(tdp_search_tool, name="TDP Search Engine"))
+mcp.add_tool(
+    Tool.from_function(ssl_search_tool, name="Small Size League Content Search")
 )
-def ssl_search(query: str) -> str:
-    return ssl_search_tool(query)
 
 
 # Setup the resources
@@ -91,21 +86,21 @@ async def get_full_rules_text():
     return full_rules_text
 
 
-@mcp.resource("full-text://repository")
-@lru_cache(maxsize=128)
-async def get_full_repository_text():
-    """
-    Retrieve the full text of the RoboCUP SSL repository.
-    This function reads the full text from a file specified in the configuration.
-    """
-    with open(config.FULL_REPOSITORY_FILE_PATH, "r") as file:
-        full_repository_text = file.read()
+# @mcp.resource("full-text://repository")
+# @lru_cache(maxsize=128)
+# async def get_full_repository_text():
+#     """
+#     Retrieve the full text of the RoboCUP SSL repository.
+#     This function reads the full text from a file specified in the configuration.
+#     """
+#     with open(config.FULL_REPOSITORY_FILE_PATH, "r") as file:
+#         full_repository_text = file.read()
 
-    if not full_repository_text:
-        logger.warning("Full repository text is empty.")
-        return "No repository text found. The tool didn't find any repository text."
+#     if not full_repository_text:
+#         logger.warning("Full repository text is empty.")
+#         return "No repository text found. The tool didn't find any repository text."
 
-    return full_repository_text
+#     return full_repository_text
 
 
 @mcp.custom_route("/health", methods=["GET"])

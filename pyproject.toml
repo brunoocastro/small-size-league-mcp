@@ -9,12 +9,14 @@ authors = [
 requires-python = ">=3.12"
 dependencies = [
     "dotenv>=0.9.9",
+    "fastapi>=0.116.1",
     "fastmcp>=2.10.5",
     "langchain-chroma>=0.2.3",
     "langchain-community>=0.3.20",
     "langchain-ollama>=0.3.0",
     "langchain-openai>=0.3.11",
     "requests>=2.32.3",
+    "pydantic>=2.11.1",
 ]
 
 [dependency-groups]
@@ -22,18 +24,7 @@ dev = [
     "ipykernel>=6.29.5",
     "ruff>=0.11.2",
 ]
-mcp-server = [
-    "fastmcp>=2.3.4",
-    "langchain-chroma>=0.2.3",
-    "langchain-ollama>=0.3.0",
-    "mcp[cli]>=1.9.0",
-    "pydantic>=2.11.1",
-    "requests>=2.32.3",
-]
 nlp = [
     "beautifulsoup4>=4.13.3",
     "lxml>=5.3.1",
 ]
-
-[tool.uv]
-default-groups = ["mcp-server"]

@@ -580,6 +580,20 @@ wheels = [
 ]
 
 [[package]]
+name = "fastapi"
+version = "0.116.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pydantic" },
+    { name = "starlette" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/78/d7/6c8b3bfe33eeffa208183ec037fee0cce9f7f024089ab1c5d12ef04bd27c/fastapi-0.116.1.tar.gz", hash = "sha256:ed52cbf946abfd70c5a0dccb24673f0670deeb517a88b3544d03c2a6bf283143", size = 296485 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e5/47/d63c60f59a59467fda0f93f46335c9d18526d7071f025cb5b89d5353ea42/fastapi-0.116.1-py3-none-any.whl", hash = "sha256:c46ac7c312df840f0c9e220f7964bada936781bc4e2e6eb71f1c4d7553786565", size = 95631 },
+]
+
+[[package]]
 name = "fastmcp"
 version = "2.10.5"
 source = { registry = "https://pypi.org/simple" }
@@ -1361,12 +1375,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/3a/f5/9506eb5578d5bbe9819ee8ba3198d0ad0e2fbe3bab8b257e4131ceb7dfb6/mcp-1.11.0.tar.gz", hash = "sha256:49a213df56bb9472ff83b3132a4825f5c8f5b120a90246f08b0dac6bedac44c8", size = 406907 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/92/9c/c9ca79f9c512e4113a5d07043013110bb3369fc7770040c61378c7fbcf70/mcp-1.11.0-py3-none-any.whl", hash = "sha256:58deac37f7483e4b338524b98bc949b7c2b7c33d978f5fafab5bde041c5e2595", size = 155880 },
-]
-
-[package.optional-dependencies]
-cli = [
-    { name = "python-dotenv" },
-    { name = "typer" },
 ]
 
 [[package]]
@@ -2488,11 +2496,13 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "dotenv" },
+    { name = "fastapi" },
     { name = "fastmcp" },
     { name = "langchain-chroma" },
     { name = "langchain-community" },
     { name = "langchain-ollama" },
     { name = "langchain-openai" },
+    { name = "pydantic" },
     { name = "requests" },
 ]
 
@@ -2500,14 +2510,6 @@ dependencies = [
 dev = [
     { name = "ipykernel" },
     { name = "ruff" },
-]
-mcp-server = [
-    { name = "fastmcp" },
-    { name = "langchain-chroma" },
-    { name = "langchain-ollama" },
-    { name = "mcp", extra = ["cli"] },
-    { name = "pydantic" },
-    { name = "requests" },
 ]
 nlp = [
     { name = "beautifulsoup4" },
@@ -2517,11 +2519,13 @@ nlp = [
 [package.metadata]
 requires-dist = [
     { name = "dotenv", specifier = ">=0.9.9" },
+    { name = "fastapi", specifier = ">=0.116.1" },
     { name = "fastmcp", specifier = ">=2.10.5" },
     { name = "langchain-chroma", specifier = ">=0.2.3" },
     { name = "langchain-community", specifier = ">=0.3.20" },
     { name = "langchain-ollama", specifier = ">=0.3.0" },
     { name = "langchain-openai", specifier = ">=0.3.11" },
+    { name = "pydantic", specifier = ">=2.11.1" },
     { name = "requests", specifier = ">=2.32.3" },
 ]
 
@@ -2529,14 +2533,6 @@ requires-dist = [
 dev = [
     { name = "ipykernel", specifier = ">=6.29.5" },
     { name = "ruff", specifier = ">=0.11.2" },
-]
-mcp-server = [
-    { name = "fastmcp", specifier = ">=2.3.4" },
-    { name = "langchain-chroma", specifier = ">=0.2.3" },
-    { name = "langchain-ollama", specifier = ">=0.3.0" },
-    { name = "mcp", extras = ["cli"], specifier = ">=1.9.0" },
-    { name = "pydantic", specifier = ">=2.11.1" },
-    { name = "requests", specifier = ">=2.32.3" },
 ]
 nlp = [
     { name = "beautifulsoup4", specifier = ">=4.13.3" },
