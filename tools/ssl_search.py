@@ -1,7 +1,10 @@
 # ENUM for filters
 from enum import Enum
 from logging import getLogger
-from typing import Optional
+from typing import List, Optional
+
+from langchain_core.documents import Document
+from pydantic import BaseModel, Field
 
 from modules.db_management import VectorStoreManager
 
@@ -16,12 +19,27 @@ class SSLDocumentSource(Enum):
 vector_store_manager = VectorStoreManager()
 
 
-def ssl_search_tool(
-    query: str,
-    k: int = 2,
-    document_source_filter: Optional[SSLDocumentSource] = None,
-    threshold: float = 0,
-):
+class SSLSearchInput(BaseModel):
+    query: str = Field(description="The search query for RoboCUP SSL documents")
+    k: int = Field(
+        default=2,
+        description="Number of most relevant documents to retrieve",
+        ge=1,
+        le=10,
+    )
+    # Filter to retrieve documents from a specific source - literal from SSLDocumentSource
+    document_source_filter: Optional[SSLDocumentSource] = Field(
+        default=None, description="Filter to retrieve documents from a specific source"
+    )
+    threshold: float = Field(
+        default=0,
+        description="Minimum relevance score threshold for returned documents",
+        ge=0,
+        le=1,
+    )
+
+
+def ssl_search_tool(input_data: SSLSearchInput) -> List[Document]:
     """
     Retrieve the RoboCUP Small Size League (SSL) K most relevant documents based on a input query.
     These documents are relative from RoboCUP SSL website and rules.
@@ -37,30 +55,38 @@ def ssl_search_tool(
     vector_store = vector_store_manager.get()
 
     logger.info(
-        f"Starting SSL search tool. Kwargs:\nQuery: {query}, k: {k}, document_source_filter: {document_source_filter}, threshold: {threshold}"
+        f"Starting SSL search tool. Kwargs:\nQuery: {input_data.query}, k: {input_data.k}, document_source_filter: {input_data.document_source_filter}, threshold: {input_data.threshold}"
     )
 
     result = vector_store.similarity_search_with_relevance_scores(
-        query,
-        k=k,
+        input_data.query,
+        k=input_data.k,
         filter=(
-            {"type": str(document_source_filter.value)}
-            if document_source_filter
+            {"type": input_data.document_source_filter.value}
+            if input_data.document_source_filter
             else None
         ),
-        score_threshold=threshold,
+        score_threshold=input_data.threshold,
     )
 
     # Filter documents based on the threshold
-    filtered_documents = [doc for doc, score in result if score >= threshold]
+    filtered_documents = [doc for doc, score in result if score >= input_data.threshold]
 
     if len(filtered_documents) == 0:
         logger.warning(
-            f"No documents found.Filters:\n type={document_source_filter}, k={k} and threshold={threshold}. Original query: '{query}'"
+            "No documents found.Filters:\n type=%s, k=%s and threshold=%s. "
+            "Original query: '%s'",
+            input_data.document_source_filter.value
+            if input_data.document_source_filter
+            else None,
+            input_data.k,
+            input_data.threshold,
+            input_data.query,
         )
     else:
         logger.info(
-            f"Retrieved {len(filtered_documents)} documents for query: '{query}'"
+            f"Retrieved {len(filtered_documents)} documents for query: "
+            f"'{input_data.query}'"
         )
 
     return filtered_documents

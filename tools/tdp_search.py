@@ -1,6 +1,7 @@
 from typing import List, Optional
 
 import httpx
+from langchain_core.documents import Document
 from pydantic import BaseModel, Field
 
 
@@ -89,8 +90,30 @@ class TDPResult(BaseModel):
 
         return markdown
 
+    def as_documents(self) -> List[Document]:
+        """Convert the TDPResult to a list of Document objects."""
+        from langchain.schema import Document
 
-async def tdp_search_tool(query: str) -> str:
+        documents = []
+        for paragraph in self.paragraphs:
+            doc = Document(
+                page_content=paragraph.content,
+                metadata={
+                    "tdp_name": paragraph.tdp_name,
+                    "tdp_url": paragraph.get_tdp_url(),
+                    "team_name": paragraph.tdp_name.team_name.name_pretty,
+                    "year": paragraph.tdp_name.year,
+                    "title": paragraph.title,
+                    "questions": paragraph.questions,
+                    "keywords": self.keywords,
+                },
+            )
+            documents.append(doc)
+
+        return documents
+
+
+async def tdp_search_tool(query: str) -> List[Document]:
     """
     Searches through TDPs (Team Description Papers) for relevant insights about small size league soccer projects.
     Useful for finding technical documentation, specifications, improvements and related information.
@@ -129,8 +152,12 @@ async def tdp_search_tool(query: str) -> str:
         # Print the TDP search result in a pretty markdown format
         print(f"\nTDP search result: \n{result.pretty_markdown()}\n")
 
-        # Return the TDP search result in a pretty markdown format
-        return result.pretty_markdown()
+        # Return the TDP search document list
+        return result.as_documents()
     except httpx.RequestError:
         # Return an error message if the TDP search API request fails
-        return "Error performing TDP search. Ignore this result."
+        return [
+            Document(
+                page_content="TDP search API request failed. Disconsider the usage of this tool.",
+            )
+        ]
